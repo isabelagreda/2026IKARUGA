@@ -2553,9 +2553,6 @@
     };
 
     const octoberGroupSchedules = {
-      ingles: [
-        { level: "Ingles A1", day: "Sabados", start: "17:00", end: "19:00", date: "24-10", finish: "9-1", commission: "F", seats: 20 }
-      ],
       coreano: [
         { level: "Coreano 1", day: "Domingos", start: "14:00", end: "17:00", date: "18-10", finish: "10-1", commission: "F", seats: 19 }
       ],
@@ -3418,33 +3415,39 @@
         ${reason.points.map((point, index) => `<div class="info-row"><strong>${reasonPointLabels[selectedReason][index] || reasonFocus[selectedReason]}</strong><p>${point}</p></div>`).join("")}
       `;
 
-      const hasGroup = selectedCourse.formats.includes("grupal");
-      const hasRecorded = selectedCourse.formats.includes("pregrabado");
       const levels = getLevelOptions();
       ensureSelectedLevel();
+      const groupMonths = getAvailableGroupMonths(selectedCourse.id);
+      const hasGroup = selectedCourse.formats.includes("grupal") && groupMonths.length > 0;
+      const hasRecorded = selectedCourse.formats.includes("pregrabado");
+      if (selectedFormat === "grupal" && !hasGroup && hasRecorded) {
+        selectedFormat = "pregrabado";
+      }
       guideLevels.innerHTML = levels.map((level) => `
         <button class="choice-card ${level.key === selectedLevelKey ? "active" : ""}" type="button" data-guide-level="${level.key}">
           <strong>${level.label}</strong>
           <span>${level.short}</span>
         </button>
       `).join("");
-      guideFormats.innerHTML = `
-        <button class="choice-card route-live ${selectedFormat === "grupal" ? "active" : ""}" type="button" data-guide-format="grupal" ${hasGroup ? "" : "disabled"}>
+      guideFormats.innerHTML = [
+        hasGroup ? `<button class="choice-card route-live ${selectedFormat === "grupal" ? "active" : ""}" type="button" data-guide-format="grupal">
           <strong>Grupal en vivo</strong>
-          <span>Para estudiar con profesor, grupo, clase semanal de 3 horas, cupos y seguimiento.</span>
+          <span>Disponible para ${groupMonths.join(", ")}. Profesor, clase semanal de 3 horas, cupos y seguimiento.</span>
           <span class="mini-tag">${hasUaiCertificate(selectedCourse, "grupal") ? "Certificado UAI" : "Sin UAI"}</span>
-        </button>
-        <button class="choice-card route-ondemand ${selectedFormat === "pregrabado" ? "active" : ""}" type="button" data-guide-format="pregrabado" ${hasRecorded ? "" : "disabled"}>
+        </button>` : "",
+        hasRecorded ? `<button class="choice-card route-ondemand ${selectedFormat === "pregrabado" ? "active" : ""}" type="button" data-guide-format="pregrabado">
           <strong>Pregrabado on demand</strong>
           <span>Para acceder a clases grabadas, estudiar a tu ritmo y no depender de horarios.</span>
           <span class="mini-tag">Precio propio</span>
-        </button>
-      `;
+        </button>` : ""
+      ].join("");
       guideFormatInfo.innerHTML = renderModalityDetail();
 
       guideCountry.innerHTML = Object.keys(scheduleByCountry).map((country) => `<option value="${country}">${country}</option>`).join("");
       guideCountry.value = countrySelect.value;
-      const availableGuideMonths = selectedCourse.id === "ruso" ? ["Septiembre"] : ["Agosto", "Septiembre", "Octubre"];
+      const availableGuideMonths = selectedFormat === "grupal"
+        ? groupMonths
+        : ["Agosto", "Septiembre", "Octubre"];
       if (!availableGuideMonths.includes(monthSelect.value)) {
         monthSelect.value = availableGuideMonths[0];
       }
@@ -3583,31 +3586,31 @@
       return seats === 1 ? "Queda 1 cupo" : `Quedan ${seats} cupos`;
     }
 
+    function getGroupScheduleTable(month) {
+      if (month === "Agosto") return augustGroupSchedules;
+      if (month === "Septiembre") return septemberGroupSchedules;
+      if (month === "Octubre") return octoberGroupSchedules;
+      return null;
+    }
+
+    function getRawGroupSchedules(courseId, month) {
+      const table = getGroupScheduleTable(month);
+      return table && table[courseId] ? table[courseId] : [];
+    }
+
+    function getAvailableGroupMonths(courseId) {
+      return ["Agosto", "Septiembre", "Octubre"].filter((month) =>
+        getRawGroupSchedules(courseId, month)
+          .filter((item) => item.seats > 0)
+          .filter(scheduleMatchesSelectedLevel)
+          .length > 0
+      );
+    }
+
     function getCourseSchedules(courseId, country, month) {
-      if (month === "Agosto" && augustGroupSchedules[courseId]) {
-        return augustGroupSchedules[courseId]
-          .filter((item) => item.seats > 0)
-          .filter(scheduleMatchesSelectedLevel)
-          .map((item, index) => ({
-            ...item,
-            month,
-            time: formatScheduleTime(item, country),
-            seats: getScarcitySeats(month, index)
-          }));
-      }
-      if (month === "Septiembre" && septemberGroupSchedules[courseId]) {
-        return septemberGroupSchedules[courseId]
-          .filter((item) => item.seats > 0)
-          .filter(scheduleMatchesSelectedLevel)
-          .map((item, index) => ({
-            ...item,
-            month,
-            time: formatScheduleTime(item, country),
-            seats: getScarcitySeats(month, index)
-          }));
-      }
-      if (month === "Octubre" && octoberGroupSchedules[courseId]) {
-        return octoberGroupSchedules[courseId]
+      const rawSchedules = getRawGroupSchedules(courseId, month);
+      if (getGroupScheduleTable(month)) {
+        return rawSchedules
           .filter((item) => item.seats > 0)
           .filter(scheduleMatchesSelectedLevel)
           .map((item, index) => ({
