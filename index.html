@@ -2484,7 +2484,7 @@
     const monthSeats = {
       Agosto: 2,
       Septiembre: 5,
-      Octubre: 5
+      Octubre: 7
     };
 
     const countryHourOffset = {
@@ -2583,7 +2583,7 @@
       tailandes4: {
         months: 4,
         hours: "3 hs",
-        quotas: 3,
+        quotas: 4,
         cert: "Certificacion universitaria UAI segun curso",
         ARG: { reg: "945.000", d40: "585.000" },
         MEX: { reg: "8.720", d40: "5.460" },
@@ -3044,7 +3044,7 @@
         label: "No quiero perder dinero",
         title: "Primero elegimos bien, despues reservas",
         copy: "Antes de avanzar ves modalidad, horario, pais, cupos y que incluye. La asesora confirma la opcion antes de cerrar la reserva.",
-        points: ["Curso completo, no partes sueltas.", "Cupos reales por mes.", "Cuotas o beneficios solo si aplican."]
+        points: ["Curso completo, no partes sueltas.", "Cupos disponibles por mes.", "Cuotas o beneficios solo si aplican."]
       }
     ];
 
@@ -3501,7 +3501,7 @@
           <button class="schedule-row ${index === selectedScheduleIndex ? "active" : ""}" type="button" data-guide-schedule="${index}">
             <strong>${item.month}</strong>
             <span class="schedule-main"><b>${item.level} - ${item.time}</b> <span>Inicio ${item.date}.${item.finish ? ` Finaliza ${item.finish}.` : ""} Comision ${item.commission}. Clase online en vivo. Se reserva el curso completo.</span></span>
-            <span class="seats">Quedan ${item.seats} cupos</span>
+            <span class="seats">${formatSeatsShort(item.seats)}</span>
           </button>
         `).join("") : `<div class="info-row"><strong>No hay grupo visible para ${getSelectedLevel()?.label || selectedCourse.name} en ${month}</strong><p>Podes probar otro mes o enviar la consulta para que ISA revise si hay apertura, espera o alternativa.</p></div>`
         : `<div class="info-row"><strong>On demand pregrabado</strong><p>No hay horario ni cupo grupal. ISA confirma precio vigente, cantidad de clases grabadas, acceso y contenido incluido.</p></div>`;
@@ -3563,46 +3563,68 @@
       return `${dayLabel} ${start.time} a ${end.time}`;
     }
 
+    function getScarcitySeats(month, index = 0) {
+      const scarcityByMonth = {
+        Agosto: [1, 2],
+        Septiembre: [5, 4],
+        Octubre: [6, 7]
+      };
+      const options = scarcityByMonth[month] || [monthSeats[month] || 5];
+      return options[index % options.length];
+    }
+
+    function formatSeatsLabel(seats) {
+      if (seats === null || seats === undefined) return "A confirmar";
+      return seats === 1 ? "1 cupo disponible" : `${seats} cupos disponibles`;
+    }
+
+    function formatSeatsShort(seats) {
+      if (seats === null || seats === undefined) return "A confirmar";
+      return seats === 1 ? "Queda 1 cupo" : `Quedan ${seats} cupos`;
+    }
+
     function getCourseSchedules(courseId, country, month) {
       if (month === "Agosto" && augustGroupSchedules[courseId]) {
         return augustGroupSchedules[courseId]
           .filter((item) => item.seats > 0)
           .filter(scheduleMatchesSelectedLevel)
-          .map((item) => ({
+          .map((item, index) => ({
             ...item,
             month,
-            time: formatScheduleTime(item, country)
+            time: formatScheduleTime(item, country),
+            seats: getScarcitySeats(month, index)
           }));
       }
       if (month === "Septiembre" && septemberGroupSchedules[courseId]) {
         return septemberGroupSchedules[courseId]
           .filter((item) => item.seats > 0)
           .filter(scheduleMatchesSelectedLevel)
-          .map((item) => ({
+          .map((item, index) => ({
             ...item,
             month,
-            time: formatScheduleTime(item, country)
+            time: formatScheduleTime(item, country),
+            seats: getScarcitySeats(month, index)
           }));
       }
       if (month === "Octubre" && octoberGroupSchedules[courseId]) {
         return octoberGroupSchedules[courseId]
           .filter((item) => item.seats > 0)
           .filter(scheduleMatchesSelectedLevel)
-          .map((item) => ({
+          .map((item, index) => ({
             ...item,
             month,
-            time: formatScheduleTime(item, country)
+            time: formatScheduleTime(item, country),
+            seats: getScarcitySeats(month, index)
           }));
       }
       const times = scheduleByCountry[country] || scheduleByCountry.Argentina;
-      const seats = monthSeats[month];
       return times.map((time, index) => ({
         level: `${selectedCourse.name} - grupo disponible ${index + 1}`,
         month,
         time,
         date: month === "Septiembre" ? "consultar" : "consultar",
         commission: "a confirmar",
-        seats
+        seats: getScarcitySeats(month, index)
       }));
     }
 
@@ -3711,11 +3733,11 @@
         <div class="price-hero">
           <span>Tu cotizacion para reservar con ISA</span>
           <strong>${price.symbol}${formatMoney(price.finalRaw)}</strong>
-          <small>${price.quotas} cuotas sin interes de ${price.symbol}${formatMoney(price.quota)}. Mensualidad estimada: ${price.symbol}${formatMoney(price.monthlyFinal)}.</small>
+          <small>${price.quotas} cuotas sin interes de ${price.symbol}${formatMoney(price.quota)}.</small>
           <div class="discount-pill">${price.discountLabel}</div>
         </div>
         <div class="quick-close-strip">
-          <div><span>Cupo</span><strong>${seats === null ? "A confirmar" : `${seats} disponibles`}</strong></div>
+          <div><span>Cupo</span><strong>${formatSeatsLabel(seats)}</strong></div>
           <div><span>Clase</span><strong>3 horas en vivo</strong></div>
           <div><span>Grupo</span><strong>Max. 20 alumnos</strong></div>
         </div>
@@ -3729,10 +3751,9 @@
           <div class="price-breakdown">
             <div class="price-line"><span>Precio regular del curso</span><strong class="${price.applies40 ? "muted-price" : ""}">${price.symbol}${formatMoney(price.regular)}</strong></div>
             <div class="price-line"><span>Matricula</span><strong>Incluida</strong></div>
-            <div class="price-line"><span>Mensual regular (${price.months} meses)</span><strong>${price.symbol}${formatMoney(price.monthlyRegular)}</strong></div>
+            <div class="price-line"><span>Duracion</span><strong>${price.months} meses</strong></div>
             <div class="price-line"><span>Certificados</span><strong>${price.cert}</strong></div>
             <div class="price-line"><span>Beneficio</span><strong>${price.discountDetail}</strong></div>
-            <div class="price-line"><span>Mensual con beneficio</span><strong>${price.symbol}${formatMoney(price.monthlyFinal)}</strong></div>
             <div class="price-line total"><span>Total a reservar con ISA</span><strong>${price.symbol}${formatMoney(price.finalRaw)}</strong></div>
             <div class="price-line"><span>Cuotas sin interes</span><strong>${price.quotas} x ${price.symbol}${formatMoney(price.quota)}</strong></div>
           </div>
@@ -3743,7 +3764,6 @@
     function renderSchedule() {
       const country = countrySelect.value;
       const month = monthSelect.value;
-      const seats = monthSeats[month];
       const times = scheduleByCountry[country] || scheduleByCountry.Argentina;
       const activeScheduleIndex = legacyScheduleIndex >= times.length ? 0 : legacyScheduleIndex;
       scheduleList.innerHTML = times.map((time, index) => `
@@ -3753,7 +3773,7 @@
             <b>${selectedCourse.name} - grupo disponible ${index + 1}</b>
             <span>${time}. Clase online en vivo de 3 horas. Se reserva el curso completo.</span>
           </span>
-          <span class="seats">Quedan ${seats} cupos</span>
+          <span class="seats">${formatSeatsShort(getScarcitySeats(month, index))}</span>
         </button>
       `).join("");
       document.querySelectorAll("[data-schedule]").forEach((button) => {
@@ -3770,7 +3790,7 @@
       const month = monthSelect.value;
       const schedules = getCourseSchedules(selectedCourse.id, country, month);
       const selectedSchedule = schedules[selectedScheduleIndex] || schedules[0];
-      const schedule = selectedSchedule ? `${selectedSchedule.level}, ${selectedSchedule.time}, inicio ${selectedSchedule.date}${selectedSchedule.finish ? `, finaliza ${selectedSchedule.finish}` : ""}, comision ${selectedSchedule.commission}, quedan ${selectedSchedule.seats} cupos` : "sin horario seleccionado";
+      const schedule = selectedSchedule ? `${selectedSchedule.level}, ${selectedSchedule.time}, inicio ${selectedSchedule.date}${selectedSchedule.finish ? `, finaliza ${selectedSchedule.finish}` : ""}, comision ${selectedSchedule.commission}, ${formatSeatsShort(selectedSchedule.seats).toLowerCase()}` : "sin horario seleccionado";
       const price = getQuotePrice();
       const onDemand = getOnDemandOffer();
       const onDemandPrice = getOnDemandPrice();
