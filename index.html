@@ -864,22 +864,22 @@
     }
 
     .guide-head {
-      padding: 18px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--line);
       background: #fbf9f6;
     }
 
     .guide-head h2 {
-      margin: 8px 0;
-      font-size: clamp(26px, 4vw, 44px);
-      line-height: 1.04;
+      margin: 6px 0;
+      font-size: clamp(24px, 3.3vw, 38px);
+      line-height: 1.06;
     }
 
     .guide-head p {
       max-width: 720px;
       margin: 0;
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.38;
     }
 
     .stepper {
@@ -919,7 +919,7 @@
 
     .guide-step {
       display: none;
-      padding: 18px;
+      padding: 16px 18px;
     }
 
     .guide-step.active {
@@ -928,14 +928,14 @@
 
     .guide-step h3 {
       margin: 0 0 8px;
-      font-size: 26px;
+      font-size: 24px;
       line-height: 1.1;
     }
 
     .guide-step > p {
-      margin: 0 0 16px;
+      margin: 0 0 12px;
       color: var(--muted);
-      line-height: 1.48;
+      line-height: 1.38;
     }
 
     .choice-grid {
@@ -956,7 +956,7 @@
     }
 
     #guideCourses .choice-card {
-      min-height: 62px;
+      min-height: 56px;
       display: flex;
       align-items: center;
     }
@@ -974,7 +974,30 @@
 
     .choice-card span {
       color: var(--muted);
-      line-height: 1.38;
+      line-height: 1.3;
+    }
+
+    #guideLevels {
+      margin-bottom: 10px;
+    }
+
+    #guideLevels .choice-card {
+      min-height: 58px;
+      padding: 10px 12px;
+    }
+
+    #guideLevels .choice-card strong {
+      margin-bottom: 2px;
+      font-size: 16px;
+    }
+
+    #guideLevels .choice-card span {
+      font-size: 12px;
+      line-height: 1.22;
+    }
+
+    #guideFormats .choice-card {
+      min-height: 104px;
     }
 
     .choice-card .mini-tag,
@@ -1001,7 +1024,7 @@
 
     .choice-card.route-live,
     .choice-card.route-ondemand {
-      min-height: 148px;
+      min-height: 108px;
       border-width: 2px;
     }
 
@@ -1018,8 +1041,8 @@
       content: "En vivo";
       display: block;
       width: fit-content;
-      margin-bottom: 8px;
-      padding: 4px 7px;
+      margin-bottom: 6px;
+      padding: 3px 7px;
       border-radius: 999px;
       background: var(--brand);
       color: #fff;
@@ -1031,8 +1054,8 @@
       content: "Pregrabado";
       display: block;
       width: fit-content;
-      margin-bottom: 8px;
-      padding: 4px 7px;
+      margin-bottom: 6px;
+      padding: 3px 7px;
       border-radius: 999px;
       background: #1d1d1b;
       color: #fff;
@@ -1115,8 +1138,8 @@
     }
 
     .modality-detail {
-      margin-top: 14px;
-      padding: 14px;
+      margin-top: 10px;
+      padding: 12px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: #fff;
@@ -1137,8 +1160,8 @@
 
     .benefit-list {
       display: grid;
-      gap: 8px;
-      margin: 12px 0 0;
+      gap: 7px;
+      margin: 10px 0 0;
     }
 
     .benefit-list div {
@@ -1180,6 +1203,34 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.4;
+    }
+
+    .level-help {
+      display: grid;
+      gap: 6px;
+      margin: 0 0 12px;
+    }
+
+    .level-help details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .level-help summary {
+      min-height: 40px;
+      padding: 10px 12px;
+      color: var(--ink);
+      font-weight: 900;
+      cursor: pointer;
+      list-style-position: inside;
+    }
+
+    .level-help p {
+      margin: 0;
+      padding: 0 12px 10px;
+      color: var(--muted);
+      line-height: 1.42;
     }
 
     .decision-panel {
@@ -1230,12 +1281,13 @@
 
     .summary-list {
       display: grid;
-      gap: 8px;
-      margin: 0 0 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+      margin: 0 0 10px;
     }
 
     .summary-item {
-      padding: 10px;
+      padding: 8px;
       background: #fbf9f6;
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -1244,7 +1296,7 @@
     .summary-item span {
       display: block;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 850;
       text-transform: uppercase;
     }
@@ -1253,6 +1305,7 @@
       display: block;
       margin-top: 3px;
       line-height: 1.25;
+      font-size: 13px;
     }
 
     .decision-note {
@@ -1268,8 +1321,8 @@
     }
 
     .quote-result {
-      margin: 14px 0;
-      padding: 14px;
+      margin: 10px 0;
+      padding: 12px;
       border: 1px solid #f0c7c7;
       border-radius: var(--radius);
       background: #fff6f6;
@@ -1290,8 +1343,8 @@
     }
 
     .quote-result h4 {
-      margin: 0 0 8px;
-      font-size: 20px;
+      margin: 0 0 6px;
+      font-size: 18px;
       line-height: 1.14;
     }
 
@@ -1302,7 +1355,7 @@
     }
 
     .quote-result ul {
-      margin: 10px 0 0;
+      margin: 8px 0 0;
       padding-left: 18px;
       color: var(--muted);
       line-height: 1.42;
@@ -1330,11 +1383,33 @@
       margin-top: 12px;
     }
 
+    .price-details {
+      margin-top: 10px;
+      border: 1px solid #efd9d9;
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .price-details summary {
+      min-height: 42px;
+      padding: 10px 12px;
+      color: var(--ink);
+      font-weight: 900;
+      cursor: pointer;
+      list-style-position: inside;
+    }
+
+    .price-details .price-breakdown {
+      margin: 0;
+      padding: 0 10px 10px;
+    }
+
     .price-hero {
       display: grid;
-      gap: 8px;
-      margin: 14px 0 12px;
-      padding: 14px;
+      gap: 7px;
+      margin: 10px 0;
+      padding: 12px;
       border-radius: var(--radius);
       background: #fff;
       border: 1px solid #efd9d9;
@@ -1716,7 +1791,100 @@
 
       .guide-head,
       .guide-step {
-        padding: 16px;
+        padding: 12px 14px;
+      }
+
+      .guide-head h2 {
+        font-size: 22px;
+        line-height: 1.08;
+      }
+
+      .guide-head p,
+      .guide-step > p {
+        font-size: 13px;
+        line-height: 1.32;
+      }
+
+      .guide-step h3 {
+        font-size: 21px;
+      }
+
+      .choice-grid {
+        gap: 8px;
+      }
+
+      .choice-card {
+        min-height: 74px;
+        padding: 10px;
+      }
+
+      .choice-card strong {
+        font-size: 16px;
+      }
+
+      .choice-card span {
+        font-size: 13px;
+      }
+
+      #guideCourses .choice-card {
+        min-height: 48px;
+      }
+
+      #guideLevels .choice-card {
+        min-height: 48px;
+        padding: 9px 10px;
+      }
+
+      #guideFormats .choice-card,
+      .choice-card.route-live,
+      .choice-card.route-ondemand {
+        min-height: 86px;
+      }
+
+      .modality-detail {
+        padding: 10px;
+      }
+
+      .benefit-list div {
+        grid-template-columns: 72px 1fr;
+        gap: 8px;
+      }
+
+      .level-help summary {
+        min-height: 36px;
+        padding: 9px 10px;
+        font-size: 13px;
+      }
+
+      .level-help p {
+        padding: 0 10px 9px;
+        font-size: 13px;
+      }
+
+      body[data-guide-step="0"] .decision-panel,
+      body[data-guide-step="1"] .decision-panel,
+      body[data-guide-step="2"] .decision-panel {
+        display: none;
+      }
+
+      body[data-guide-step="3"] .summary-list,
+      body[data-guide-step="3"] .decision-note,
+      body[data-guide-step="3"] .close-note,
+      body[data-guide-step="3"] .quote-result ul {
+        display: none;
+      }
+
+      body[data-guide-step="3"] .decision-panel h3 {
+        margin-bottom: 8px;
+        font-size: 19px;
+      }
+
+      body[data-guide-step="3"] .quote-result {
+        margin-top: 8px;
+      }
+
+      body[data-guide-step="3"] .price-hero strong {
+        font-size: 30px;
       }
 
       .stepper {
@@ -1734,7 +1902,17 @@
       }
 
       .quick-close-strip {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .quick-close-strip div {
+        padding: 8px 6px;
+      }
+
+      .quick-close-strip strong {
+        font-size: 12px;
       }
 
       .certificate-card {
@@ -1816,12 +1994,12 @@
           <div class="guide-head">
             <span class="section-kicker">Cotizador academico IKARUGA</span>
             <h2>Elegis el curso que mejor va con tu objetivo.</h2>
-            <p>La guia te muestra idiomas, modalidad, horarios, cupos y precio. ISA aparece al final como asesora educativa para ayudarte a confirmar nivel, disponibilidad e inscripcion.</p>
+            <p>Elegis idioma, objetivo, nivel y modalidad. Al final ves cupo, horario, precio y se lo envias a ISA para cerrar la inscripcion.</p>
           </div>
           <div class="stepper" id="guideStepper" aria-label="Pasos de eleccion"></div>
           <div class="guide-step active" data-guide-step="0">
             <h3>1. Elegi tu idioma</h3>
-            <p>Primero elegi el idioma. Despues te mostramos si conviene grupal en vivo o pregrabado.</p>
+            <p>Elegilo y seguimos con el objetivo.</p>
             <div class="choice-grid" id="guideCourses"></div>
           </div>
           <div class="guide-step" data-guide-step="1">
@@ -1831,14 +2009,16 @@
             <div class="info-panel" id="guideReasonInfo"></div>
           </div>
           <div class="guide-step" data-guide-step="2">
-            <h3>3. Elegi una modalidad</h3>
-            <p>Son dos caminos distintos. Elegi uno para ver informacion, precio y cierre correcto.</p>
+            <h3>3. Elegi nivel y modalidad</h3>
+            <p>Elegi nivel y modalidad para ver la opcion correcta.</p>
+            <div class="choice-grid" id="guideLevels"></div>
             <div class="choice-grid" id="guideFormats"></div>
             <div class="info-panel" id="guideFormatInfo"></div>
           </div>
           <div class="guide-step" data-guide-step="3">
             <h3>4. Mira cupo y horario</h3>
             <p>Elegis pais y fecha. ISA confirma el cupo real y te pasa la reserva.</p>
+            <div class="level-help" id="guideLevelHelp" aria-label="Explicacion de niveles"></div>
             <div class="form-row">
               <label>Desde donde estudiarias?
                 <select id="guideCountry"></select>
@@ -2523,6 +2703,218 @@
       }
     };
 
+    const levelOptions = {
+      japones: [
+        {
+          key: "japones-1",
+          label: "Japones 1",
+          scheduleLevel: "Japones 1",
+          short: "Inicial desde cero",
+          description: "Empezas con hiragana, pronunciacion, saludos y primeras frases.",
+          benefits: ["Inicial desde cero", "Base de lectura y pronunciacion", "Incluye clases de cultura y masterclass"]
+        },
+        {
+          key: "japones-2",
+          label: "Japones 2",
+          scheduleLevel: "Japones 2",
+          short: "Ya tenes base",
+          description: "Continuas lectura, estructura y comunicacion simple.",
+          benefits: ["Refuerzo de lectura y frases", "Mas vocabulario y practica oral", "Incluye clases de cultura y masterclass"]
+        },
+        {
+          key: "japones-3",
+          label: "Japones 3",
+          scheduleLevel: "Japones 3",
+          short: "Continuidad",
+          description: "Avanzas con mas comprension, vocabulario y expresion.",
+          benefits: ["Mas practica de lectura", "Estructuras de continuidad", "Seguimiento para sostener progreso"]
+        },
+        {
+          key: "japones-4",
+          label: "Japones 4",
+          scheduleLevel: "Japones 4",
+          short: "Avance sostenido",
+          description: "Para seguir profundizando si ya venis cursando.",
+          benefits: ["Continuidad del recorrido", "Practica con profesor", "Correccion y acompanamiento"]
+        }
+      ],
+      coreano: [
+        {
+          key: "coreano-1",
+          label: "Coreano 1",
+          scheduleLevel: "Coreano 1",
+          short: "Inicial desde cero",
+          description: "Empezas con Hangul, pronunciacion, saludos y vocabulario cotidiano.",
+          benefits: ["Hangul desde cero", "Pronunciacion guiada", "Frases para uso cotidiano"]
+        },
+        {
+          key: "coreano-2",
+          label: "Coreano 2",
+          scheduleLevel: "Coreano 2",
+          short: "Continuidad inicial",
+          description: "Para quienes ya reconocen Hangul y quieren responder mejor.",
+          benefits: ["Mas vocabulario", "Frases y respuestas", "Continuidad hacia conversacion simple"]
+        }
+      ],
+      ingles: [
+        {
+          key: "ingles-a1",
+          label: "Ingles A1",
+          scheduleLevel: "Ingles A1",
+          short: "Inicial",
+          description: "Para empezar u ordenar una base comunicativa.",
+          benefits: ["Presentarte y hablar de rutinas", "Vocabulario esencial", "Practica oral guiada"]
+        },
+        {
+          key: "ingles-a2",
+          label: "Ingles A2",
+          scheduleLevel: "Ingles A2",
+          short: "Continuidad basica",
+          description: "Para comunicarte con mas seguridad en situaciones reales.",
+          benefits: ["Mas fluidez", "Correccion de estructura", "Viaje, trabajo y conversaciones simples"]
+        }
+      ],
+      chino: [
+        {
+          key: "chino-1",
+          label: "Chino 1",
+          scheduleLevel: "Chino 1",
+          short: "Inicial desde cero",
+          description: "Empezas con Pinyin, tonos, pronunciacion y primeras frases.",
+          benefits: ["Pinyin y tonos", "Pronunciacion desde el inicio", "Primeras frases utiles"]
+        },
+        {
+          key: "chino-2",
+          label: "Chino 2",
+          scheduleLevel: "Chino 2",
+          short: "Continuidad",
+          description: "Para quienes ya conocen la base inicial.",
+          benefits: ["Mas vocabulario", "Estructuras simples", "Comprension y practica guiada"]
+        }
+      ],
+      tailandes: [
+        {
+          key: "tailandes-1",
+          label: "Tailandes 1",
+          scheduleLevel: "Tailandes 1",
+          short: "Inicial desde cero",
+          description: "Pronunciacion, saludos, frases de viaje y comunicacion simple.",
+          benefits: ["Frases utiles para viaje", "Pronunciacion guiada", "Base cultural y cotidiana"]
+        },
+        {
+          key: "tailandes-2",
+          label: "Tailandes 2",
+          scheduleLevel: "Tailandes 2",
+          short: "Continuidad",
+          description: "Sumas vocabulario, respuestas y situaciones cotidianas.",
+          benefits: ["Mas respuestas", "Situaciones reales", "Practica acompanada"]
+        },
+        {
+          key: "tailandes-3",
+          label: "Tailandes 3",
+          scheduleLevel: "Tailandes 3",
+          short: "Mas practica",
+          description: "Para avanzar con mas seguridad, escucha y expresiones utiles.",
+          benefits: ["Escucha y expresion", "Mas vocabulario", "Continuidad del recorrido"]
+        }
+      ],
+      italiano: [
+        {
+          key: "italiano-a1",
+          label: "Italiano A1",
+          scheduleLevel: "Italiano A1",
+          short: "Inicial",
+          description: "Para empezar desde cero o retomar una base.",
+          benefits: ["Pronunciacion", "Frases cotidianas", "Viaje, familia o ciudadania"]
+        },
+        {
+          key: "italiano-a2",
+          label: "Italiano A2",
+          scheduleLevel: "Italiano A2",
+          short: "Continuidad basica",
+          description: "Para comunicarte con mas soltura si ya tenes lo esencial.",
+          benefits: ["Mas conversacion", "Gramatica clara", "Situaciones reales"]
+        }
+      ],
+      aleman: [
+        {
+          key: "aleman-a1",
+          label: "Aleman A1",
+          scheduleLevel: "Aleman A1",
+          short: "Inicial",
+          description: "Para empezar desde cero con pronunciacion, frases y estructura basica.",
+          benefits: ["Base ordenada", "Pronunciacion y estructura", "Acompanamiento en idioma exigente"]
+        },
+        {
+          key: "aleman-a2",
+          label: "Aleman A2",
+          scheduleLevel: "Aleman A2",
+          short: "Continuidad",
+          description: "Para ampliar vocabulario, gramatica y seguridad.",
+          benefits: ["Mas vocabulario", "Orden gramatical", "Practica sostenida"]
+        }
+      ],
+      ruso: [
+        {
+          key: "ruso-1",
+          label: "Ruso 1",
+          scheduleLevel: "Ruso 1",
+          short: "Inicial desde cero",
+          description: "Empezas con alfabeto cirilico, pronunciacion y frases simples.",
+          benefits: ["Alfabeto cirilico", "Lectura inicial", "Profesor y grupo para sostener ritmo"]
+        }
+      ]
+    };
+
+    const levelGuides = {
+      japones: [
+        ["Japones 1: inicial desde cero", "Para empezar sin conocimientos previos. Ves hiragana, pronunciacion, saludos, frases utiles y primeras estructuras."],
+        ["Japones 2: ya cursaste una base", "Para quienes ya conocen lectura inicial y pueden armar frases simples. Se refuerza comunicacion, vocabulario y estructura."],
+        ["Japones 3: continuidad", "Para seguir ganando lectura, comprension y mas seguridad para expresarte en situaciones cotidianas."],
+        ["Japones 4: avance sostenido", "Para estudiantes que ya vienen con recorrido y quieren seguir profundizando con profesor y practica constante."]
+      ],
+      coreano: [
+        ["Coreano 1: inicial desde cero", "Para empezar con Hangul, pronunciacion, saludos, presentacion personal y vocabulario cotidiano."],
+        ["Coreano 2: continuidad inicial", "Para quienes ya reconocen Hangul y quieren construir frases, responder mejor y ampliar vocabulario."],
+        ["Como saber si entrar", "Si no sabes tu nivel, ISA puede orientarte para que no entres a un grupo demasiado facil o demasiado avanzado."]
+      ],
+      ingles: [
+        ["Ingles A1: inicial", "Para empezar o ordenar una base: presentarte, hablar de rutinas, viajes simples, preguntas frecuentes y vocabulario esencial."],
+        ["Ingles A2: continuidad basica", "Para quienes ya conocen lo esencial y quieren comunicarse con mas seguridad en situaciones reales."],
+        ["Enfoque del curso", "Se trabaja conversacion, vocabulario practico, correccion y confianza para usar el idioma."]
+      ],
+      chino: [
+        ["Chino 1: inicial desde cero", "Para empezar con Pinyin, tonos, pronunciacion, saludos, numeros y primeras frases utiles."],
+        ["Chino 2: continuidad", "Para quienes ya conocen la base inicial y quieren ampliar vocabulario, estructura y comprension."],
+        ["Que se refuerza", "Pronunciacion, escucha, lectura inicial y practica para sostener un idioma que necesita guia."]
+      ],
+      tailandes: [
+        ["Tailandes 1: inicial desde cero", "Para empezar con pronunciacion, saludos, frases de viaje y comunicacion simple."],
+        ["Tailandes 2: continuidad", "Para quienes ya tienen una base y quieren sumar vocabulario, respuestas y situaciones cotidianas."],
+        ["Tailandes 3: mas practica", "Para avanzar con mas seguridad, escucha y expresiones utiles para viaje, cultura o interes personal."]
+      ],
+      italiano: [
+        ["Italiano A1: inicial", "Para empezar desde cero o retomar una base: pronunciacion, presentacion, frases cotidianas y situaciones de viaje."],
+        ["Italiano A2: continuidad basica", "Para quienes ya pueden entender y decir frases simples y quieren comunicarse con mas soltura."],
+        ["Enfoque del curso", "Se trabaja gramatica clara, conversacion, cultura y uso practico para viaje, ciudadania o familia."]
+      ],
+      aleman: [
+        ["Aleman A1: inicial", "Para empezar desde cero con pronunciacion, presentacion, frases simples, vocabulario cotidiano y estructura basica."],
+        ["Aleman A2: continuidad", "Para quienes ya tienen una base y quieren ordenar gramatica, ampliar vocabulario y responder con mas seguridad."],
+        ["Como se avanza", "El seguimiento ayuda a sostener un idioma exigente sin estudiar solo."]
+      ],
+      ruso: [
+        ["Ruso 1: inicial desde cero", "Para empezar con alfabeto cirilico, pronunciacion, saludos, lectura inicial y frases simples."],
+        ["Que vas a construir", "Una base ordenada para leer, reconocer sonidos y empezar a comunicar ideas simples."],
+        ["Acompanamiento", "Al ser un idioma desafiante, el grupo y el profesor ayudan a sostener el ritmo."]
+      ],
+      default: [
+        ["Nivel 1: inicial desde cero", "Para empezar sin conocimientos previos y construir una base ordenada."],
+        ["Nivel 2: ya tenes una base", "Para quienes ya cursaron un primer nivel o pueden armar frases simples."],
+        ["Continuidad", "Para seguir avanzando con profesor, practica y seguimiento."]
+      ]
+    };
+
     const courseDetails = {
       default: {
         duration: "Curso completo por modulos",
@@ -2578,6 +2970,50 @@
           ["Uso en viaje", "Restaurantes, traslados, preguntas y situaciones simples."],
           ["Practica acompanada", "Grupo reducido para consultar y mejorar pronunciacion."]
         ]
+      },
+      chino: {
+        duration: "Inicial y continuidad",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Pinyin, tonos, pronunciacion y primeras estructuras",
+        outcomes: [
+          ["Pronunciacion", "Trabajas tonos y sonidos desde el inicio para no avanzar con errores."],
+          ["Base practica", "Saludos, numeros, frases utiles y vocabulario para situaciones simples."],
+          ["Acompanamiento", "El profesor ayuda a sostener un idioma que requiere guia constante."]
+        ]
+      },
+      tailandes: {
+        duration: "Inicial y continuidad",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Pronunciacion, frases de viaje y comunicacion cotidiana",
+        outcomes: [
+          ["Viaje y cultura", "Aprendes frases utiles para moverte, saludar, comprar y pedir ayuda."],
+          ["Escucha", "Practicas sonidos y respuestas para ganar seguridad poco a poco."],
+          ["Grupo reducido", "Ideal para consultar y corregir pronunciacion con seguimiento."]
+        ]
+      },
+      aleman: {
+        duration: "A1 y continuidad",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Pronunciacion, gramatica clara y vocabulario cotidiano",
+        outcomes: [
+          ["Base ordenada", "Presentacion, frases simples, estructura y vocabulario esencial."],
+          ["Progreso cuidado", "El acompanamiento ayuda a sostener un idioma exigente sin perderse."],
+          ["Uso real", "Practica para estudio, viaje, trabajo o desafio personal."]
+        ]
+      },
+      ruso: {
+        duration: "Nivel inicial desde cero",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Alfabeto cirilico, pronunciacion, lectura inicial y frases simples",
+        outcomes: [
+          ["Lectura inicial", "Empezas por alfabeto, sonidos y reconocimiento de palabras."],
+          ["Base comunicativa", "Saludos, presentacion y primeras frases para construir seguridad."],
+          ["Acompanamiento", "Profesor y grupo ayudan a sostener el ritmo en un idioma desafiante."]
+        ]
       }
     };
 
@@ -2615,6 +3051,7 @@
     let selectedCourse = courses[0];
     let selectedReason = "hobby";
     let selectedFormat = "grupal";
+    let selectedLevelKey = "japones-1";
     let selectedScheduleIndex = 0;
     let legacyScheduleIndex = 0;
     let selectedObjection = objections[0];
@@ -2642,8 +3079,10 @@
     const guideReasonLead = document.getElementById("guideReasonLead");
     const guideReasons = document.getElementById("guideReasons");
     const guideReasonInfo = document.getElementById("guideReasonInfo");
+    const guideLevels = document.getElementById("guideLevels");
     const guideFormats = document.getElementById("guideFormats");
     const guideFormatInfo = document.getElementById("guideFormatInfo");
+    const guideLevelHelp = document.getElementById("guideLevelHelp");
     const guideCountry = document.getElementById("guideCountry");
     const guideMonth = document.getElementById("guideMonth");
     const guideSchedules = document.getElementById("guideSchedules");
@@ -2674,6 +3113,7 @@
         button.addEventListener("click", () => {
           selectedCourse = courses.find((course) => course.id === button.dataset.course);
           selectedFormat = selectedCourse.formats[0];
+          selectedLevelKey = getLevelOptions(selectedCourse)[0]?.key || "";
           selectedScheduleIndex = 0;
           renderAll();
           document.getElementById("recorrido").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2803,6 +3243,28 @@
       return onDemandCatalog[course.id] || onDemandCatalog.default;
     }
 
+    function getLevelOptions(course = selectedCourse) {
+      return levelOptions[course.id] || levelOptions.default || [];
+    }
+
+    function ensureSelectedLevel() {
+      const options = getLevelOptions();
+      if (!options.some((level) => level.key === selectedLevelKey)) {
+        selectedLevelKey = options[0]?.key || "";
+      }
+      return options.find((level) => level.key === selectedLevelKey) || options[0];
+    }
+
+    function getSelectedLevel() {
+      return ensureSelectedLevel();
+    }
+
+    function scheduleMatchesSelectedLevel(item) {
+      const selectedLevel = getSelectedLevel();
+      if (!selectedLevel || !selectedLevel.scheduleLevel) return true;
+      return item.level === selectedLevel.scheduleLevel;
+    }
+
     function getOnDemandPrice(country = countrySelect.value) {
       const key = getPriceCountryKey(country);
       return onDemandPricing[key] || onDemandPricing.USD;
@@ -2812,30 +3274,49 @@
       return `${price.symbol}${value}${price.suffix || ""}`;
     }
 
+    function getLevelGuide(course = selectedCourse) {
+      return levelGuides[course.id] || levelGuides.default;
+    }
+
+    function renderLevelHelp() {
+      const selectedLevel = getSelectedLevel();
+      const levels = selectedLevel
+        ? [[`${selectedLevel.label}: ${selectedLevel.short}`, `${selectedLevel.description} Beneficios: ${selectedLevel.benefits.join(", ")}.`]]
+        : getLevelGuide().slice(0, 1);
+      guideLevelHelp.innerHTML = levels.map(([title, copy], index) => `
+        <details ${index === 0 ? "open" : ""}>
+          <summary>${title}</summary>
+          <p>${copy}</p>
+        </details>
+      `).join("");
+    }
+
     function renderModalityDetail() {
       const offer = getOnDemandOffer();
+      const detail = getDetail();
+      const selectedLevel = getSelectedLevel();
       if (selectedFormat === "pregrabado") {
         return `
           <div class="modality-detail">
             <h4>Que incluye ${selectedCourse.name} on demand</h4>
-            <p>Es para estudiar sin horario fijo, repasar cuando quieras y avanzar antes de hablar con ISA sobre continuidad.</p>
+            <p>Clases grabadas para avanzar a tu ritmo${selectedLevel ? ` desde ${selectedLevel.label}` : ""}. Ideal si no podes sostener horario fijo.</p>
             <div class="benefit-list">
               <div><span>Clases</span><strong>${offer.classes}</strong></div>
-              <div><span>Incluye</span><strong>${offer.includes}</strong></div>
               <div><span>Aprendes</span><strong>${offer.learns}</strong></div>
               <div><span>Ritmo</span><strong>${offer.access}</strong></div>
             </div>
           </div>
         `;
       }
+      const levelBenefits = selectedLevel ? selectedLevel.benefits.slice(0, 2) : [];
       return `
         <div class="modality-detail">
-          <h4>Beneficios del grupal en vivo</h4>
-          <p>Es para avanzar con profesor, grupo reducido y una estructura clara segun tu nivel.</p>
+          <h4>Beneficios de ${selectedLevel ? selectedLevel.label : selectedCourse.name} grupal en vivo</h4>
+          <p>Profesor en vivo, grupo reducido y avance ordenado segun tu nivel.</p>
           <div class="benefit-list">
-            <div><span>Nivel</span><strong>${selectedCourse.level}. ISA confirma si ese grupo es el correcto para vos.</strong></div>
+            <div><span>Nivel</span><strong>${selectedLevel ? selectedLevel.description : detail.duration}</strong></div>
             <div><span>Clase</span><strong>Una clase online semanal de 3 horas. Se reserva el curso completo.</strong></div>
-            <div><span>Grupo</span><strong>Maximo 20 alumnos para poder consultar, practicar y recibir seguimiento.</strong></div>
+            ${levelBenefits.map((benefit) => `<div><span>Beneficio</span><strong>${benefit}</strong></div>`).join("")}
             <div><span>Extra</span><strong>${hasUaiCertificate(selectedCourse, "grupal") ? "Incluye certificacion UAI segun curso y nivel." : "Incluye acompanamiento academico y recorrido ordenado."}</strong></div>
           </div>
         </div>
@@ -2869,20 +3350,24 @@
           <li>Aprendes ${offer.learns}.</li>
           <li>${offer.continuity || "ISA confirma el recorrido exacto disponible"}.</li>
         </ul>
-        <div class="price-breakdown">
-          <div class="price-line"><span>Tipo de curso</span><strong>Pregrabado on demand</strong></div>
-          <div class="price-line"><span>Valor regular</span><strong class="muted-price">${regularAmount}</strong></div>
-          <div class="price-line"><span>${odPrice.mainLabel}</span><strong>${mainAmount}</strong></div>
-          <div class="price-line"><span>${odPrice.transferLabel}</span><strong>${transferAmount}</strong></div>
-          <div class="price-line"><span>Financiacion</span><strong>${odPrice.split}</strong></div>
-          <div class="price-line"><span>Profesor en vivo</span><strong>No incluido</strong></div>
-          <div class="price-line"><span>Cupo grupal</span><strong>No aplica</strong></div>
-        </div>
+        <details class="price-details">
+          <summary>Ver desglose completo</summary>
+          <div class="price-breakdown">
+            <div class="price-line"><span>Tipo de curso</span><strong>Pregrabado on demand</strong></div>
+            <div class="price-line"><span>Valor regular</span><strong class="muted-price">${regularAmount}</strong></div>
+            <div class="price-line"><span>${odPrice.mainLabel}</span><strong>${mainAmount}</strong></div>
+            <div class="price-line"><span>${odPrice.transferLabel}</span><strong>${transferAmount}</strong></div>
+            <div class="price-line"><span>Financiacion</span><strong>${odPrice.split}</strong></div>
+            <div class="price-line"><span>Profesor en vivo</span><strong>No incluido</strong></div>
+            <div class="price-line"><span>Cupo grupal</span><strong>No aplica</strong></div>
+          </div>
+        </details>
       `;
     }
 
     function renderGuide() {
       const stepLabels = ["Idioma", "Uso", "Opcion", "Reserva"];
+      document.body.dataset.guideStep = String(guideStep);
       guideStepper.innerHTML = stepLabels.map((label, index) => `<button class="step-dot ${index === guideStep ? "active" : ""}" type="button" data-guide-step-target="${index}">${index + 1}. ${label}</button>`).join("");
       document.querySelectorAll("[data-guide-step]").forEach((step) => {
         step.classList.toggle("active", Number(step.dataset.guideStep) === guideStep);
@@ -2935,6 +3420,14 @@
 
       const hasGroup = selectedCourse.formats.includes("grupal");
       const hasRecorded = selectedCourse.formats.includes("pregrabado");
+      const levels = getLevelOptions();
+      ensureSelectedLevel();
+      guideLevels.innerHTML = levels.map((level) => `
+        <button class="choice-card ${level.key === selectedLevelKey ? "active" : ""}" type="button" data-guide-level="${level.key}">
+          <strong>${level.label}</strong>
+          <span>${level.short}</span>
+        </button>
+      `).join("");
       guideFormats.innerHTML = `
         <button class="choice-card route-live ${selectedFormat === "grupal" ? "active" : ""}" type="button" data-guide-format="grupal" ${hasGroup ? "" : "disabled"}>
           <strong>Grupal en vivo</strong>
@@ -2958,6 +3451,7 @@
       guideMonth.innerHTML = availableGuideMonths.map((month) => `<option value="${month}">${month}</option>`).join("");
       guideMonth.value = monthSelect.value;
 
+      renderLevelHelp();
       renderGuideSchedules();
       renderGuideSummary();
 
@@ -2965,6 +3459,7 @@
         button.addEventListener("click", () => {
           selectedCourse = courses.find((course) => course.id === button.dataset.guideCourse);
           selectedFormat = selectedCourse.formats[0];
+          selectedLevelKey = getLevelOptions(selectedCourse)[0]?.key || "";
           selectedScheduleIndex = 0;
           renderAll();
         });
@@ -2972,6 +3467,13 @@
       document.querySelectorAll("[data-guide-reason]").forEach((button) => {
         button.addEventListener("click", () => {
           selectedReason = button.dataset.guideReason;
+          renderAll();
+        });
+      });
+      document.querySelectorAll("[data-guide-level]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedLevelKey = button.dataset.guideLevel;
+          selectedScheduleIndex = 0;
           renderAll();
         });
       });
@@ -2995,13 +3497,13 @@
       const schedules = getCourseSchedules(selectedCourse.id, country, month);
       if (selectedScheduleIndex >= schedules.length) selectedScheduleIndex = 0;
       guideSchedules.innerHTML = selectedFormat === "grupal"
-        ? schedules.map((item, index) => `
+        ? schedules.length ? schedules.map((item, index) => `
           <button class="schedule-row ${index === selectedScheduleIndex ? "active" : ""}" type="button" data-guide-schedule="${index}">
             <strong>${item.month}</strong>
             <span class="schedule-main"><b>${item.level} - ${item.time}</b> <span>Inicio ${item.date}.${item.finish ? ` Finaliza ${item.finish}.` : ""} Comision ${item.commission}. Clase online en vivo. Se reserva el curso completo.</span></span>
             <span class="seats">Quedan ${item.seats} cupos</span>
           </button>
-        `).join("")
+        `).join("") : `<div class="info-row"><strong>No hay grupo visible para ${getSelectedLevel()?.label || selectedCourse.name} en ${month}</strong><p>Podes probar otro mes o enviar la consulta para que ISA revise si hay apertura, espera o alternativa.</p></div>`
         : `<div class="info-row"><strong>On demand pregrabado</strong><p>No hay horario ni cupo grupal. ISA confirma precio vigente, cantidad de clases grabadas, acceso y contenido incluido.</p></div>`;
       document.querySelectorAll("[data-guide-schedule]").forEach((button) => {
         button.addEventListener("click", () => {
@@ -3065,6 +3567,7 @@
       if (month === "Agosto" && augustGroupSchedules[courseId]) {
         return augustGroupSchedules[courseId]
           .filter((item) => item.seats > 0)
+          .filter(scheduleMatchesSelectedLevel)
           .map((item) => ({
             ...item,
             month,
@@ -3074,6 +3577,7 @@
       if (month === "Septiembre" && septemberGroupSchedules[courseId]) {
         return septemberGroupSchedules[courseId]
           .filter((item) => item.seats > 0)
+          .filter(scheduleMatchesSelectedLevel)
           .map((item) => ({
             ...item,
             month,
@@ -3083,6 +3587,7 @@
       if (month === "Octubre" && octoberGroupSchedules[courseId]) {
         return octoberGroupSchedules[courseId]
           .filter((item) => item.seats > 0)
+          .filter(scheduleMatchesSelectedLevel)
           .map((item) => ({
             ...item,
             month,
@@ -3164,15 +3669,18 @@
       const schedules = getCourseSchedules(selectedCourse.id, country, month);
       if (selectedScheduleIndex >= schedules.length) selectedScheduleIndex = 0;
       const selectedSchedule = schedules[selectedScheduleIndex] || schedules[0];
-      const schedule = selectedFormat === "grupal" && selectedSchedule ? `${selectedSchedule.level} - ${selectedSchedule.time}` : "Sin horario fijo";
-      const seats = selectedFormat === "grupal" && selectedSchedule ? selectedSchedule.seats : monthSeats[month];
+      const hasSelectedSchedule = selectedFormat === "grupal" && selectedSchedule;
+      const schedule = hasSelectedSchedule ? `${selectedSchedule.level} - ${selectedSchedule.time}` : selectedFormat === "grupal" ? `Sin grupo visible para ${getSelectedLevel()?.label || selectedCourse.name}` : "Sin horario fijo";
+      const seats = hasSelectedSchedule ? selectedSchedule.seats : null;
       const price = getQuotePrice();
       const onDemand = getOnDemandOffer();
       const onDemandPrice = getOnDemandPrice();
+      const selectedLevel = getSelectedLevel();
       const reasonLabel = selectedReason === "hobby" ? "Hobby" : selectedReason === "viaje" ? "Viaje" : "Trabajo";
       const formatLabel = selectedFormat === "grupal" ? "Grupal en vivo" : "Pregrabado on demand";
       guideSummary.innerHTML = `
         <div class="summary-item"><span>Curso</span><strong>${selectedCourse.name}</strong></div>
+        <div class="summary-item"><span>Nivel</span><strong>${selectedLevel ? selectedLevel.label : "A confirmar"}</strong></div>
         <div class="summary-item"><span>Objetivo</span><strong>${reasonLabel}</strong></div>
         <div class="summary-item"><span>Modalidad</span><strong>${formatLabel}</strong></div>
         <div class="summary-item"><span>${selectedFormat === "grupal" ? "Horario" : "Acceso"}</span><strong>${selectedFormat === "grupal" ? `${month} - ${schedule}` : "Sin horario fijo"}</strong></div>
@@ -3183,6 +3691,19 @@
         : selectedReason === "viaje"
           ? "porque enfoca el aprendizaje en situaciones reales de viaje"
           : "porque te da una base ordenada para usar el idioma como herramienta profesional";
+      if (guideStep < 3) {
+        const nextAction = guideStep === 0
+          ? "Ahora elegi para que queres usar el idioma."
+          : guideStep === 1
+            ? "Ahora elegi nivel y modalidad."
+            : "Ahora mira horario, cupo y precio.";
+        quoteResult.innerHTML = `
+          <span class="label">Avance</span>
+          <h4>${selectedCourse.name}${selectedLevel ? ` - ${selectedLevel.label}` : ""}</h4>
+          <p>${nextAction} Al final ISA recibe tu eleccion completa para ayudarte con la inscripcion.</p>
+        `;
+        return;
+      }
       quoteResult.innerHTML = selectedFormat === "grupal" ? `
         <span class="label">Opcion recomendada</span>
         <h4>${selectedCourse.name} ${formatLabel} - ${month}</h4>
@@ -3194,7 +3715,7 @@
           <div class="discount-pill">${price.discountLabel}</div>
         </div>
         <div class="quick-close-strip">
-          <div><span>Cupo</span><strong>${seats} disponibles</strong></div>
+          <div><span>Cupo</span><strong>${seats === null ? "A confirmar" : `${seats} disponibles`}</strong></div>
           <div><span>Clase</span><strong>3 horas en vivo</strong></div>
           <div><span>Grupo</span><strong>Max. 20 alumnos</strong></div>
         </div>
@@ -3203,16 +3724,19 @@
           <li>${schedule}</li>
           <li>No queremos que pierdas tiempo ni dinero: ISA confirma nivel, cupo y si esta opcion es la correcta antes de reservar.</li>
         </ul>
-        <div class="price-breakdown">
-          <div class="price-line"><span>Precio regular del curso</span><strong class="${price.applies40 ? "muted-price" : ""}">${price.symbol}${formatMoney(price.regular)}</strong></div>
-          <div class="price-line"><span>Matricula</span><strong>Incluida</strong></div>
-          <div class="price-line"><span>Mensual regular (${price.months} meses)</span><strong>${price.symbol}${formatMoney(price.monthlyRegular)}</strong></div>
-          <div class="price-line"><span>Certificados</span><strong>${price.cert}</strong></div>
-          <div class="price-line"><span>Beneficio</span><strong>${price.discountDetail}</strong></div>
-          <div class="price-line"><span>Mensual con beneficio</span><strong>${price.symbol}${formatMoney(price.monthlyFinal)}</strong></div>
-          <div class="price-line total"><span>Total a reservar con ISA</span><strong>${price.symbol}${formatMoney(price.finalRaw)}</strong></div>
-          <div class="price-line"><span>Cuotas sin interes</span><strong>${price.quotas} x ${price.symbol}${formatMoney(price.quota)}</strong></div>
-        </div>
+        <details class="price-details">
+          <summary>Ver desglose completo</summary>
+          <div class="price-breakdown">
+            <div class="price-line"><span>Precio regular del curso</span><strong class="${price.applies40 ? "muted-price" : ""}">${price.symbol}${formatMoney(price.regular)}</strong></div>
+            <div class="price-line"><span>Matricula</span><strong>Incluida</strong></div>
+            <div class="price-line"><span>Mensual regular (${price.months} meses)</span><strong>${price.symbol}${formatMoney(price.monthlyRegular)}</strong></div>
+            <div class="price-line"><span>Certificados</span><strong>${price.cert}</strong></div>
+            <div class="price-line"><span>Beneficio</span><strong>${price.discountDetail}</strong></div>
+            <div class="price-line"><span>Mensual con beneficio</span><strong>${price.symbol}${formatMoney(price.monthlyFinal)}</strong></div>
+            <div class="price-line total"><span>Total a reservar con ISA</span><strong>${price.symbol}${formatMoney(price.finalRaw)}</strong></div>
+            <div class="price-line"><span>Cuotas sin interes</span><strong>${price.quotas} x ${price.symbol}${formatMoney(price.quota)}</strong></div>
+          </div>
+        </details>
       ` : renderOnDemandQuote(reasonText);
     }
 
@@ -3250,13 +3774,14 @@
       const price = getQuotePrice();
       const onDemand = getOnDemandOffer();
       const onDemandPrice = getOnDemandPrice();
+      const selectedLevel = getSelectedLevel();
       const reason = selectedReason === "hobby" ? "hobby" : selectedReason === "viaje" ? "viaje" : "trabajo";
       const format = selectedFormat === "grupal" ? "curso grupal en vivo" : "curso pregrabado on demand";
       const scheduleText = selectedFormat === "grupal" ? ` Me interesa el grupo de ${month}, ${schedule}.` : "";
       const certificateText = selectedFormat === "grupal" && hasUaiCertificate(selectedCourse) ? " Vi que incluye certificado UAI segun curso." : "";
       const priceText = selectedFormat === "grupal" ? ` La cotizacion que vi es: precio regular ${price.symbol}${formatMoney(price.regular)}, beneficio ${price.discountLabel}, total ${price.symbol}${formatMoney(price.finalRaw)} y ${price.quotas} cuotas de ${price.symbol}${formatMoney(price.quota)}.` : "";
       const onDemandText = selectedFormat === "pregrabado" ? ` Vi la opcion pregrabada: ${onDemand.classes}, ${onDemand.access}. Precio visto: ${formatOnDemandAmount(onDemandPrice, onDemandPrice.main)} por ${onDemandPrice.mainLabel}; pago unico ${formatOnDemandAmount(onDemandPrice, onDemandPrice.transfer)}. Quiero que me confirmes acceso, contenido incluido y pasos de reserva.` : "";
-      const text = `Hola ISA, arme mi cotizacion en la pagina de IKARUGA. Me interesa ${selectedCourse.name} por ${reason}. Elegi ${format}, estudiaria desde ${country} y quiero revisar ${month}.${scheduleText}${priceText}${certificateText}${onDemandText} Quiero que me confirmes si puedo reservar esta opcion.`;
+      const text = `Hola ISA, arme mi cotizacion en la pagina de IKARUGA. Me interesa ${selectedCourse.name}${selectedLevel ? `, nivel ${selectedLevel.label}` : ""}, por ${reason}. Elegi ${format}, estudiaria desde ${country} y quiero revisar ${month}.${scheduleText}${priceText}${certificateText}${onDemandText} Quiero que me confirmes si puedo reservar esta opcion.`;
       const base = WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}` : "https://wa.me/";
       return `${base}?text=${encodeURIComponent(text)}`;
     }
