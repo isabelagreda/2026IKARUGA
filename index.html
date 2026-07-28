@@ -1,0 +1,3334 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IKARUGA - Elegi tu curso</title>
+  <meta name="description" content="Cursos online de idiomas IKARUGA. Elegi idioma, objetivo, modalidad y horarios disponibles segun tu pais.">
+  <style>
+    :root {
+      --ink: #1d1d1b;
+      --muted: #5c5c57;
+      --line: #e4e0da;
+      --paper: #fbf7f0;
+      --surface: #ffffff;
+      --brand: #d11717;
+      --brand-dark: #941111;
+      --accent: #f2c14e;
+      --culture: #243b53;
+      --shadow: 0 16px 48px rgba(29, 29, 27, .13);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8f5ef;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    button, select {
+      font: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 9px clamp(18px, 4vw, 48px);
+      background: rgba(255, 255, 255, .94);
+      border-bottom: 1px solid rgba(29, 29, 27, .1);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 6px 10px;
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 154px;
+      height: auto;
+      display: block;
+    }
+
+    .brand span {
+      display: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ghost-link,
+    .primary-link,
+    .mini-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .ghost-link {
+      color: var(--ink);
+      background: #fff;
+      border-color: var(--line);
+    }
+
+    .primary-link {
+      color: #fff;
+      background: var(--brand);
+      box-shadow: 0 10px 24px rgba(209, 23, 23, .24);
+    }
+
+    .hero {
+      min-height: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: center;
+      gap: 14px;
+      padding: clamp(22px, 4vw, 42px) clamp(18px, 4vw, 48px) clamp(16px, 3vw, 28px);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .99), rgba(255, 255, 255, .92)),
+        url("hero-estudiantes-online.png") center right / cover no-repeat;
+    }
+
+    .hero-copy {
+      max-width: 980px;
+    }
+
+    .hero-visual {
+      display: none;
+    }
+
+    .hero-logo-panel {
+      width: min(390px, 100%);
+      padding: 20px;
+      background: #fff;
+      border: 1px solid rgba(228, 224, 218, .95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-logo-panel img {
+      width: min(280px, 100%);
+      margin: 0 auto;
+      display: block;
+    }
+
+    .hero-logo-panel p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      color: var(--brand-dark);
+      background: #fff1f1;
+      border: 1px solid #f4c9c9;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 12px 0 10px;
+      font-size: clamp(30px, 4.6vw, 54px);
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    .lead {
+      max-width: 740px;
+      margin: 0;
+      color: #343431;
+      font-size: clamp(16px, 1.6vw, 18px);
+      line-height: 1.38;
+      font-weight: 520;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+      max-width: 760px;
+    }
+
+    .path-preview {
+      display: none;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 760px;
+      margin: 28px 0 0;
+    }
+
+    .path-preview span {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .trust-item {
+      min-height: 0;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid rgba(228, 224, 218, .95);
+      border-radius: var(--radius);
+    }
+
+    .trust-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--brand);
+      font-size: 15px;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .section {
+      padding: clamp(34px, 6vw, 72px) clamp(18px, 4vw, 48px);
+      scroll-margin-top: 92px;
+    }
+
+    .brand-strip {
+      padding: 22px clamp(18px, 4vw, 48px);
+      color: #fff;
+      background: var(--brand);
+    }
+
+    .brand-strip-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .brand-strip strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: clamp(19px, 2.4vw, 28px);
+      line-height: 1.1;
+    }
+
+    .brand-strip p {
+      margin: 0;
+      color: rgba(255, 255, 255, .9);
+      line-height: 1.45;
+    }
+
+    .brand-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .brand-proof span {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .section-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 3.2vw, 42px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 480px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .course-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 235px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--brand);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(29, 29, 27, .06);
+      text-align: left;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .course-card:hover,
+    .course-card.active {
+      transform: translateY(-2px);
+      border-color: var(--brand);
+      box-shadow: var(--shadow);
+    }
+
+    .course-card.active {
+      background: linear-gradient(180deg, #fff 0%, #fff7f7 100%);
+    }
+
+    .course-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .course-name {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 0 9px;
+      border-radius: var(--radius);
+      color: var(--brand-dark);
+      background: #fff1f1;
+      border: 1px solid #efcaca;
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .course-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .formats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+    }
+
+    .pill {
+      min-height: 30px;
+      padding: 5px 9px;
+      border-radius: var(--radius);
+      color: var(--culture);
+      background: #f5f6f8;
+      border: 1px solid #dde2e8;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .path-section {
+      background: #ffffff;
+      border-block: 1px solid var(--line);
+    }
+
+    .choice-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid #ebe1d2;
+      border-radius: var(--radius);
+    }
+
+    .panel h3,
+    .offer h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .segment {
+      min-height: 60px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 850;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .segment.active {
+      color: #fff;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .reason-box {
+      min-height: 216px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .reason-box h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: var(--brand-dark);
+    }
+
+    .reason-box p {
+      margin: 0 0 12px;
+      color: #31474e;
+      line-height: 1.5;
+    }
+
+    .reason-box ul,
+    .offer ul {
+      margin: 0;
+      padding-left: 19px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .offer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(19, 37, 43, .05);
+    }
+
+    .offer.disabled {
+      opacity: .58;
+      background: #f5f1ea;
+    }
+
+    .offer .label {
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .advisor-section {
+      background: #fff;
+      border-block: 1px solid var(--line);
+    }
+
+    .advisor-layout,
+    .detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .advisor-card,
+    .detail-card,
+    .fit-card {
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 28px rgba(29, 29, 27, .06);
+    }
+
+    .advisor-card {
+      border-top: 5px solid var(--brand);
+    }
+
+    .advisor-card h3,
+    .detail-card h3,
+    .fit-card h3,
+    .answer-box h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+      line-height: 1.12;
+    }
+
+    .advisor-card p,
+    .detail-card p,
+    .fit-card p,
+    .answer-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.48;
+    }
+
+    .call-points,
+    .level-list,
+    .objection-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .call-point {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      background: #fbf9f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .call-point span {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--brand);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .call-point strong,
+    .level-list strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .fact {
+      min-height: 82px;
+      padding: 12px;
+      background: #fbf9f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .fact span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .fact strong {
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .level-list div {
+      padding: 12px;
+      background: #fbf9f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .level-list strong {
+      color: var(--brand-dark);
+    }
+
+    .objection-list button {
+      min-height: 52px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: left;
+      font-weight: 850;
+    }
+
+    .objection-list button.active {
+      color: #fff;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .answer-box {
+      min-height: 240px;
+      padding: 18px;
+      background: #fff6f6;
+      border: 1px solid #f0c7c7;
+      border-radius: var(--radius);
+    }
+
+    .answer-box h3 {
+      color: var(--brand-dark);
+    }
+
+    .answer-box ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 10px 0 4px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    select {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 12px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .schedule {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 66px;
+      padding: 12px;
+      background: #f8fbfa;
+      border: 1px solid #e5e1dc;
+      border-radius: var(--radius);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .schedule-row.active {
+      background: #fff6f6;
+      border-color: var(--brand);
+      box-shadow: 0 10px 24px rgba(209, 23, 23, .12);
+    }
+
+    .schedule-row strong {
+      color: var(--brand-dark);
+    }
+
+    .schedule-main {
+      display: grid;
+      gap: 4px;
+    }
+
+    .schedule-main b {
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .schedule-main span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .seats {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 9px;
+      color: #fff;
+      background: var(--brand);
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .benefits-band {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .benefits-band .section-head {
+      align-items: start;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .benefits-band .section-head p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      min-height: 30px;
+      align-items: center;
+      padding: 0 10px;
+      margin-bottom: 12px;
+      color: var(--brand-dark);
+      background: #fff1f1;
+      border: 1px solid #f2cccc;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .closing-band {
+      padding: clamp(36px, 6vw, 70px) clamp(18px, 4vw, 48px);
+      background: #fff;
+    }
+
+    .closing-card {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(240px, .42fr) minmax(0, .58fr);
+      align-items: center;
+      gap: clamp(20px, 4vw, 48px);
+      padding: clamp(20px, 4vw, 42px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+
+    .closing-card img {
+      width: min(300px, 100%);
+      display: block;
+      margin: 0 auto;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .closing-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .closing-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .brand-strip,
+    #cursos,
+    #recorrido,
+    #llamada,
+    #ficha,
+    #grupal,
+    #dudas,
+    #beneficios,
+    .closing-band {
+      display: none;
+    }
+
+    .guide-flow {
+      padding: clamp(14px, 3vw, 28px) clamp(16px, 4vw, 48px) clamp(42px, 6vw, 76px);
+      background: #fff;
+    }
+
+    .guide-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, .68fr) minmax(300px, .32fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .guide-main,
+    .decision-panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 32px rgba(29, 29, 27, .07);
+    }
+
+    .guide-main {
+      overflow: hidden;
+    }
+
+    .guide-head {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fbf9f6;
+    }
+
+    .guide-head h2 {
+      margin: 8px 0;
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1.04;
+    }
+
+    .guide-head p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .step-dot {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 850;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    button.step-dot {
+      font-family: inherit;
+    }
+
+    .step-dot.active {
+      color: #fff;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .guide-step {
+      display: none;
+      padding: 18px;
+    }
+
+    .guide-step.active {
+      display: block;
+    }
+
+    .guide-step h3 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      line-height: 1.1;
+    }
+
+    .guide-step > p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.48;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .choice-card {
+      min-height: 104px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    #guideCourses .choice-card {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+    }
+
+    #guideCourses .choice-card strong {
+      margin-bottom: 0;
+    }
+
+    .choice-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    .choice-card span {
+      color: var(--muted);
+      line-height: 1.38;
+    }
+
+    .choice-card .mini-tag,
+    .course-tags .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-top: 10px;
+      padding: 5px 8px;
+      border: 1px solid #efd9d9;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--brand);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .choice-card.active {
+      border-color: var(--brand);
+      background: #fff6f6;
+      box-shadow: 0 10px 24px rgba(209, 23, 23, .1);
+    }
+
+    .choice-card.route-live,
+    .choice-card.route-ondemand {
+      min-height: 148px;
+      border-width: 2px;
+    }
+
+    .choice-card.route-live {
+      background: #fffafa;
+    }
+
+    .choice-card.route-ondemand {
+      background: #fff;
+      border-color: #d8d1c8;
+    }
+
+    .choice-card.route-live strong::before {
+      content: "En vivo";
+      display: block;
+      width: fit-content;
+      margin-bottom: 8px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .choice-card.route-ondemand strong::before {
+      content: "Pregrabado";
+      display: block;
+      width: fit-content;
+      margin-bottom: 8px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #1d1d1b;
+      color: #fff;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .guide-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 16px 18px 18px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .guide-actions button {
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #fff;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .guide-actions button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .guide-actions .next-btn {
+      color: #fff;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .info-panel {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .quick-close-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .quick-close-strip div {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .quick-close-strip span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .quick-close-strip strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.15;
+    }
+
+    .modality-detail {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .modality-detail h4 {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.12;
+    }
+
+    .modality-detail p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .benefit-list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 0;
+    }
+
+    .benefit-list div {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding-top: 9px;
+      border-top: 1px solid var(--line);
+    }
+
+    .benefit-list span {
+      color: var(--brand);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .benefit-list strong {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .info-row {
+      padding: 13px;
+      background: #fbf9f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .info-row strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--brand-dark);
+    }
+
+    .info-row p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .decision-panel {
+      position: sticky;
+      top: 108px;
+      padding: 16px;
+    }
+
+    .decision-panel h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .isa-card {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin: 0 0 14px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .isa-card img {
+      width: 74px;
+      height: 74px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #eadada;
+    }
+
+    .isa-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.15;
+    }
+
+    .isa-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    .summary-item {
+      padding: 10px;
+      background: #fbf9f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .summary-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-top: 3px;
+      line-height: 1.25;
+    }
+
+    .decision-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.42;
+    }
+
+    .decision-panel .primary-link {
+      width: 100%;
+      min-height: 52px;
+    }
+
+    .quote-result {
+      margin: 14px 0;
+      padding: 14px;
+      border: 1px solid #f0c7c7;
+      border-radius: var(--radius);
+      background: #fff6f6;
+    }
+
+    .quote-result .label {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      padding: 0 8px;
+      margin-bottom: 8px;
+      color: #fff;
+      background: var(--brand);
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .quote-result h4 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.14;
+    }
+
+    .quote-result p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .quote-result ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .close-note {
+      margin-top: 12px;
+      padding: 12px;
+      background: #1d1d1b;
+      color: #fff;
+      border-radius: var(--radius);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .close-note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .price-breakdown {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .price-hero {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 12px;
+      padding: 14px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid #efd9d9;
+    }
+
+    .price-hero span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .price-hero strong {
+      color: var(--brand);
+      font-size: clamp(30px, 9vw, 42px);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .price-hero small {
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .discount-pill {
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #1d1d1b;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .certificate-card {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid #efd9d9;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .certificate-thumb {
+      min-height: 86px;
+      border: 1px solid #e7dada;
+      border-radius: 7px;
+      background:
+        linear-gradient(90deg, transparent 0 58%, rgba(209, 23, 23, .1) 58% 64%, transparent 64%),
+        linear-gradient(#fff, #fff);
+      box-shadow: 0 8px 18px rgba(29, 29, 27, .08);
+      position: relative;
+    }
+
+    .certificate-thumb::before {
+      content: "UAI";
+      position: absolute;
+      top: 11px;
+      left: 10px;
+      color: var(--brand);
+      font-size: 15px;
+      font-weight: 950;
+    }
+
+    .certificate-thumb::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 14px;
+      height: 24px;
+      border-top: 2px solid #1d1d1b;
+      border-bottom: 2px solid #1d1d1b;
+      opacity: .16;
+    }
+
+    .certificate-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.15;
+    }
+
+    .certificate-card p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .price-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 0;
+      border-top: 1px solid #f0dede;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .price-line strong {
+      color: var(--ink);
+      font-size: 15px;
+      text-align: right;
+    }
+
+    .price-line strong.muted-price {
+      color: var(--muted);
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+    }
+
+    .price-line.total {
+      margin-top: 4px;
+      padding: 11px;
+      border: 0;
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 850;
+    }
+
+    .price-line.total strong {
+      color: var(--brand);
+      font-size: 22px;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .benefit {
+      position: relative;
+      min-height: 142px;
+      padding: 18px 18px 18px 64px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(29, 29, 27, .06);
+    }
+
+    .benefit::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--brand);
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .benefit p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .resume-box {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid #f0c7c7;
+      border-radius: var(--radius);
+      background: #fff6f6;
+    }
+
+    .resume-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--brand-dark);
+      font-size: 18px;
+    }
+
+    .resume-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .download-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .download-row p {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      z-index: 30;
+      display: none;
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: var(--brand);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 16px 40px rgba(19, 37, 43, .32);
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 18px;
+        padding-bottom: 14px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, .99), rgba(255, 255, 255, .93)),
+          url("hero-estudiantes-online.png") center right / cover no-repeat;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .trust-row,
+      .path-preview,
+      .brand-strip-inner,
+      .brand-proof,
+      .course-grid,
+      .choice-layout,
+      .advisor-layout,
+      .detail-layout,
+      .offer-grid,
+      .fact-grid,
+      .benefit-grid,
+      .resume-box,
+      .closing-card,
+      .guide-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .course-card {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      body {
+        padding-bottom: 78px;
+        overflow-x: hidden;
+      }
+
+      .topbar {
+        align-items: start;
+      }
+
+      .ghost-link {
+        display: none;
+      }
+
+      .nav-actions {
+        flex: 0 1 auto;
+        min-width: 0;
+      }
+
+      .topbar .primary-link {
+        min-height: 42px;
+        max-width: 132px;
+        padding-inline: 10px;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.05;
+        font-size: 12px;
+      }
+
+      .brand img {
+        width: 128px;
+      }
+
+      .primary-link,
+      .mini-action {
+        min-height: 46px;
+        padding-inline: 13px;
+      }
+
+      h1 {
+        font-size: clamp(28px, 8.5vw, 38px);
+        line-height: 1.02;
+      }
+
+      .lead {
+        font-size: 15px;
+      }
+
+      .hero-actions .primary-link {
+        width: 100%;
+      }
+
+      .hero-actions {
+        margin-top: 12px;
+      }
+
+      .trust-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .trust-item {
+        padding: 8px;
+      }
+
+      .trust-item strong {
+        font-size: 13px;
+      }
+
+      .trust-item span {
+        font-size: 11px;
+      }
+
+      .trust-item {
+        min-height: 0;
+      }
+
+      .segmented,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .segment {
+        min-height: 50px;
+      }
+
+      .schedule-row {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .guide-flow {
+        padding-inline: 12px;
+      }
+
+      .guide-head,
+      .guide-step {
+        padding: 16px;
+      }
+
+      .stepper {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+        padding: 10px 12px;
+      }
+
+      .step-dot {
+        min-height: 34px;
+        padding: 6px 4px;
+        border-radius: 8px;
+        font-size: 11px;
+        line-height: 1.1;
+      }
+
+      .quick-close-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .certificate-card {
+        grid-template-columns: 58px 1fr;
+      }
+
+      .certificate-thumb {
+        min-height: 74px;
+      }
+
+      .isa-card {
+        grid-template-columns: 58px 1fr;
+        gap: 10px;
+      }
+
+      .isa-card img {
+        width: 58px;
+        height: 58px;
+      }
+
+      .download-row .primary-link {
+        width: 100%;
+      }
+
+      .resume-box .primary-link {
+        width: 100%;
+      }
+
+      .sticky-cta {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="IKARUGA Academia Online">
+      <img src="ikaruga-logo-horizontal-white.png" alt="IKARUGA Academia Online">
+      <span>IKARUGA</span>
+    </a>
+    <nav class="nav-actions" aria-label="Acciones principales">
+      <a class="ghost-link" href="#guia">Guia paso a paso</a>
+      <a class="primary-link" id="topWhatsApp" href="#" target="_blank" rel="noopener">Hablar con una asesora</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <span class="eyebrow">Cotizador rapido IKARUGA</span>
+        <h1>Elegi tu curso y mandale a ISA una consulta clara.</h1>
+        <p class="lead">ISA es tu asesora educativa de confianza. La pagina te ayuda a elegir idioma, objetivo y modalidad para que ella pueda orientarte y confirmar la reserva.</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#guia">Empezar cotizacion</a>
+        </div>
+        <div class="trust-row" aria-label="Resumen de propuesta">
+          <div class="trust-item"><strong>3 horas</strong><span>clase grupal online en vivo.</span></div>
+          <div class="trust-item"><strong>20 max.</strong><span>grupo cuidado para consultar.</span></div>
+          <div class="trust-item"><strong>ISA orienta</strong><span>confirma nivel, cupo y reserva.</span></div>
+        </div>
+        <div class="path-preview" aria-label="Recorrido de decision">
+          <span>1. Elegis idioma</span>
+          <span>2. Contas tu objetivo</span>
+          <span>3. Ves modalidad</span>
+          <span>4. Consultas con ISA</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Identidad de marca IKARUGA">
+        <div class="hero-logo-panel">
+          <img src="ikaruga-logo-white.png" alt="IKARUGA Academia Online">
+          <p>Clases online, grupos por nivel y acompanamiento para que empezar sea mas simple.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-flow" id="guia">
+      <div class="guide-shell">
+        <div class="guide-main">
+          <div class="guide-head">
+            <span class="section-kicker">Cotizador agil IKARUGA</span>
+            <h2>Elegis una opcion y se la envias a ISA.</h2>
+            <p>ISA es tu asesora educativa de confianza: recibe tu eleccion, revisa si es correcta para vos y te confirma el paso final.</p>
+          </div>
+          <div class="stepper" id="guideStepper" aria-label="Pasos de eleccion"></div>
+          <div class="guide-step active" data-guide-step="0">
+            <h3>1. Elegi tu idioma</h3>
+            <p>Primero elegi el idioma. Despues te mostramos si conviene grupal en vivo o pregrabado.</p>
+            <div class="choice-grid" id="guideCourses"></div>
+          </div>
+          <div class="guide-step" data-guide-step="1">
+            <h3 id="guideReasonHeading">2. Decinos para que lo queres</h3>
+            <p id="guideReasonLead">La informacion cambia si estudias por hobby, viaje o trabajo.</p>
+            <div class="choice-grid" id="guideReasons"></div>
+            <div class="info-panel" id="guideReasonInfo"></div>
+          </div>
+          <div class="guide-step" data-guide-step="2">
+            <h3>3. Elegi una modalidad</h3>
+            <p>Son dos caminos distintos. Elegi uno para ver informacion, precio y cierre correcto.</p>
+            <div class="choice-grid" id="guideFormats"></div>
+            <div class="info-panel" id="guideFormatInfo"></div>
+          </div>
+          <div class="guide-step" data-guide-step="3">
+            <h3>4. Mira cupo y horario</h3>
+            <p>Elegis pais y fecha. ISA confirma el cupo real y te pasa la reserva.</p>
+            <div class="form-row">
+              <label>Desde donde estudiarias?
+                <select id="guideCountry"></select>
+              </label>
+              <label>Inicio que te interesa
+                <select id="guideMonth">
+                  <option value="Agosto">Agosto</option>
+                  <option value="Septiembre">Septiembre</option>
+                  <option value="Octubre">Octubre</option>
+                </select>
+              </label>
+            </div>
+            <div class="schedule" id="guideSchedules"></div>
+          </div>
+          <div class="guide-actions">
+            <button type="button" id="guideBack">Volver</button>
+            <button class="next-btn" type="button" id="guideNext">Siguiente</button>
+          </div>
+        </div>
+
+        <aside class="decision-panel" aria-label="Resumen de eleccion">
+          <h3>Tu cotizacion</h3>
+          <div class="isa-card">
+            <img src="isa-asesora-web.jpg" alt="ISA, asesora educativa de confianza">
+            <div>
+              <strong>ISA es tu asesora educativa de confianza</strong>
+              <span>La pagina ordena tu eleccion; ISA confirma nivel, disponibilidad y reserva.</span>
+            </div>
+          </div>
+          <div class="summary-list" id="guideSummary"></div>
+          <div class="quote-result" id="quoteResult"></div>
+          <p class="decision-note">Cuando envies WhatsApp, ISA recibe tu idioma, objetivo, modalidad y precio elegido para ayudarte a cerrar sin empezar de cero.</p>
+          <a class="primary-link" id="guideWhatsApp" href="#" target="_blank" rel="noopener">Enviar mi opcion a ISA</a>
+          <div class="close-note"><strong>Listo para que ISA te ayude</strong>Ella confirma si esa opcion es la correcta antes de avanzar con la reserva.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="brand-strip" aria-label="Promesa de marca IKARUGA">
+      <div class="brand-strip-inner">
+        <div>
+          <strong>IKARUGA ayuda a que aprender un idioma deje de sentirse lejano.</strong>
+          <p>Somos una comunidad de aprendizaje online: cercana, organizada y orientada a que cada estudiante encuentre un camino claro para empezar o avanzar.</p>
+        </div>
+        <div class="brand-proof" aria-label="Diferenciales">
+          <span>Grupos por nivel</span>
+          <span>Acompanamiento academico</span>
+          <span>Comunicacion directa</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cursos">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Todos los cursos disponibles</h2>
+          <p>Selecciona un idioma para ver una recomendacion clara segun tu objetivo, nivel y disponibilidad.</p>
+        </div>
+        <div class="course-grid" id="courseGrid"></div>
+      </div>
+    </section>
+
+    <section class="section path-section" id="recorrido">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2 id="selectedTitle">Arma tu camino</h2>
+          <p>Primero entendemos para que queres estudiar. Asi la informacion deja de ser generica y se vuelve util para decidir.</p>
+        </div>
+
+        <div class="choice-layout">
+          <div class="panel">
+            <h3>1. Para que queres estudiarlo?</h3>
+            <div class="segmented" role="tablist" aria-label="Motivo de estudio">
+              <button class="segment active" type="button" data-reason="hobby">Hobby</button>
+              <button class="segment" type="button" data-reason="viaje">Viaje</button>
+              <button class="segment" type="button" data-reason="trabajo">Trabajo</button>
+            </div>
+            <div class="reason-box" id="reasonBox"></div>
+          </div>
+
+          <div class="panel">
+            <h3>2. Elegi la modalidad que mejor te acompana</h3>
+            <div class="offer-grid" id="offerGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section advisor-section" id="llamada">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Como te lo explicaria ISA</span>
+            <h2>Antes de elegir, mira lo importante de la cursada.</h2>
+          </div>
+          <p>La llamada normalmente ordena estas dudas: como es la clase, que incluye, que pasa si faltas y que opcion conviene segun tu rutina.</p>
+        </div>
+        <div class="advisor-layout">
+          <div class="advisor-card">
+            <h3>Lo que tenes que saber del curso grupal</h3>
+            <p>No es una clase suelta ni una parte del curso. Reservas un curso completo con encuentros online en vivo.</p>
+            <div class="call-points">
+              <div class="call-point"><span>1</span><div><strong>Clase semanal de 3 horas</strong><p>Un encuentro completo para avanzar, practicar y consultar.</p></div></div>
+              <div class="call-point"><span>2</span><div><strong>Grupo reducido</strong><p>Maximo 20 alumnos para que el profesor pueda seguir el proceso.</p></div></div>
+              <div class="call-point"><span>3</span><div><strong>Material y acompanamiento</strong><p>Acceso a contenidos de apoyo, indicaciones de estudio y seguimiento durante la cursada.</p></div></div>
+            </div>
+          </div>
+          <div class="advisor-card">
+            <h3>Si no llegaste a la llamada</h3>
+            <p>Usa esta pagina como una mini orientacion: elegi idioma, motivo, modalidad y horario. El mensaje llega armado para que la asesora te responda sobre algo concreto.</p>
+            <div class="call-points">
+              <div class="call-point"><span>?</span><div><strong>No se tu nivel</strong><p>Podemos orientarte antes de reservar y ubicarte en el grupo correcto.</p></div></div>
+              <div class="call-point"><span>!</span><div><strong>No quiero perder plata</strong><p>Por eso mostramos modalidad, duracion, horario, cupos y que incluye antes del contacto.</p></div></div>
+              <div class="call-point"><span>+</span><div><strong>Necesito flexibilidad</strong><p>Si no podes sostener horario fijo, revisa si ese idioma tiene pregrabado on demand.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ficha">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Ficha recomendada</span>
+            <h2 id="detailTitle">Tu curso seleccionado</h2>
+          </div>
+          <p id="detailIntro">Esta informacion cambia segun el idioma, el objetivo y la modalidad que elijas.</p>
+        </div>
+        <div class="detail-layout">
+          <div class="detail-card">
+            <h3>Que incluye</h3>
+            <div class="fact-grid" id="factGrid"></div>
+          </div>
+          <div class="fit-card">
+            <h3>Que vas a poder hacer</h3>
+            <div class="level-list" id="levelList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="grupal">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Curso grupal en vivo</h2>
+          <p>La informacion importante antes de reservar: modalidad, acompanamiento, pais de cursada, horarios y cupos disponibles.</p>
+        </div>
+
+        <div class="offer">
+          <span class="label">Elegir bien tambien es parte de aprender</span>
+          <h3>No queremos que pierdas tiempo ni dinero en una opcion que no acompane tu objetivo</h3>
+          <ul>
+            <li>Clases online en vivo con profesor y espacio para consultar.</li>
+            <li>Cada encuentro es una clase completa de 3 horas.</li>
+            <li>La reserva corresponde al curso completo, no a una parte de la clase.</li>
+            <li>Maximo 20 alumnos por grupo para cuidar el seguimiento.</li>
+            <li>Material de apoyo y programa descargable.</li>
+            <li>Fechas y horarios disponibles segun el pais desde donde estudies.</li>
+          </ul>
+
+          <div class="form-row">
+            <label>Desde donde estudiarias?
+              <select id="countrySelect">
+                <option value="Argentina">Argentina</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Chile">Chile</option>
+                <option value="Peru">Peru</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Espana">Espana</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+              </select>
+            </label>
+            <label>Inicio que te interesa
+              <select id="monthSelect">
+                <option value="Agosto">Agosto</option>
+                <option value="Septiembre">Septiembre</option>
+                <option value="Octubre">Octubre</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="schedule" id="scheduleList" aria-live="polite"></div>
+        </div>
+
+        <div class="download-row">
+          <div>
+            <strong>Material para descargar</strong>
+            <p>Incluye resumen de cursada grupal, beneficios, cupos orientativos y como elegir bien la modalidad.</p>
+          </div>
+          <a class="ghost-link" href="programa-cursos-grupales-ikaruga.pdf" download>Descargar PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section advisor-section" id="dudas">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Dudas comunes</span>
+            <h2>Si no compraste todavia, probablemente sea por una de estas dudas.</h2>
+          </div>
+          <p>Toca la que mas se parece a tu caso y te mostramos una respuesta corta, como lo aclarariamos antes de reservar.</p>
+        </div>
+        <div class="advisor-layout">
+          <div class="objection-list" id="objectionList"></div>
+          <div class="answer-box" id="answerBox"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits-band" id="beneficios">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Retomar sin llamada</span>
+            <h2>No llegaste a hablar, pero podes resolverlo en pocos pasos.</h2>
+          </div>
+          <p>Elegis lo esencial y nos escribis con una consulta lista: idioma, motivo, modalidad, pais y mes de inicio.</p>
+        </div>
+        <div class="benefit-grid">
+          <div class="benefit" data-step="1"><strong>Volves al curso</strong><p>Elegis el idioma que te habia interesado.</p></div>
+          <div class="benefit" data-step="2"><strong>Marcamos tu motivo</strong><p>Hobby, viaje o trabajo para orientar mejor la recomendacion.</p></div>
+          <div class="benefit" data-step="3"><strong>Ves opciones reales</strong><p>Grupal, pregrabado, pais, horarios, fechas y cupos.</p></div>
+          <div class="benefit" data-step="4"><strong>Retomas por WhatsApp</strong><p>ISA recibe tu eleccion y te ayuda a confirmar el lugar.</p></div>
+        </div>
+        <div class="resume-box">
+          <div>
+            <strong>Tu consulta no se pierde.</strong>
+            <p>Si todavia te interesa estudiar, retoma desde aca sin coordinar otra llamada.</p>
+          </div>
+          <a class="primary-link" id="benefitsWhatsApp" href="#" target="_blank" rel="noopener">Retomar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-band">
+      <div class="closing-card">
+        <img src="ikaruga-logo-white.png" alt="IKARUGA Academia Online">
+        <div>
+          <h2>Cuando ya elegiste, ISA te ayuda a confirmar el mejor grupo.</h2>
+          <p>El mensaje llega con idioma, objetivo, modalidad, pais y mes. Asi la conversacion empieza ordenada y la asesora puede confirmar cupo, nivel y forma de reserva.</p>
+          <a class="primary-link" id="bottomWhatsApp" href="#" target="_blank" rel="noopener">Quiero hablar con una asesora</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="sticky-cta" id="stickyWhatsApp" href="#" target="_blank" rel="noopener">Enviar cotizacion a ISA</a>
+
+  <script>
+    const WHATSAPP_NUMBER = "";
+
+    const courses = [
+      {
+        id: "japones",
+        name: "Japones",
+        hook: "Para anime, cultura, viaje a Japon, becas, trabajo o una meta personal exigente.",
+        formats: ["grupal", "pregrabado"],
+        level: "Inicial y continuidad",
+        reasons: {
+          hobby: {
+            title: "Japones por hobby",
+            copy: "Ideal si queres disfrutar anime, manga, musica, cultura japonesa o estudiar algo desafiante con una guia clara.",
+            points: ["Aprendes lectura y expresiones utiles desde cero.", "Vas ganando constancia sin estudiar solo.", "El grupo ayuda a sostener el ritmo."]
+          },
+          viaje: {
+            title: "Japones para viajar",
+            copy: "Enfocado en situaciones reales: moverte, pedir ayuda, comprar, presentarte y entender costumbres basicas.",
+            points: ["Frases utiles para aeropuerto, hotel y transporte.", "Contexto cultural para evitar errores comunes.", "Practica oral para ganar seguridad."]
+          },
+          trabajo: {
+            title: "Japones para trabajo",
+            copy: "Una base ordenada para quienes quieren sumar un diferencial academico o profesional a mediano plazo.",
+            points: ["Base de comunicacion formal e informal.", "Habitos de estudio para avanzar de nivel.", "Acompanamiento para sostener progreso."]
+          }
+        }
+      },
+      {
+        id: "coreano",
+        name: "Coreano",
+        hook: "Para cultura coreana, K-pop, dramas, viaje, intercambio o desarrollo personal.",
+        formats: ["grupal", "pregrabado"],
+        level: "Inicial",
+        reasons: {
+          hobby: {
+            title: "Coreano por hobby",
+            copy: "Perfecto si queres entender canciones, series y cultura sin quedarte solo en traducciones.",
+            points: ["Primeros pasos con lectura y pronunciacion.", "Vocabulario cotidiano.", "Ritmo acompanado para no abandonar."]
+          },
+          viaje: {
+            title: "Coreano para viajar",
+            copy: "Pensado para manejar situaciones simples y disfrutar mas la experiencia en Corea.",
+            points: ["Saludos, compras y ubicacion.", "Frases de supervivencia viajera.", "Practica para responder con seguridad."]
+          },
+          trabajo: {
+            title: "Coreano para trabajo",
+            copy: "Una base para abrir puertas en cultura, comercio, turismo o proyectos vinculados a Corea.",
+            points: ["Comunicacion inicial ordenada.", "Habitos de estudio sostenibles.", "Seguimiento para avanzar por niveles."]
+          }
+        }
+      },
+      {
+        id: "ingles",
+        name: "Ingles",
+        hook: "Para trabajo, entrevistas, viajes, estudio y comunicacion internacional.",
+        formats: ["grupal", "pregrabado"],
+        level: "Inicial e intermedio",
+        reasons: {
+          hobby: {
+            title: "Ingles por hobby",
+            copy: "Para consumir contenido, conversar y sentir que por fin avanzas sin frustrarte.",
+            points: ["Conversacion progresiva.", "Vocabulario util.", "Correccion en vivo."]
+          },
+          viaje: {
+            title: "Ingles para viajar",
+            copy: "Orientado a resolver situaciones practicas en aeropuertos, hoteles, restaurantes y tours.",
+            points: ["Frases para moverte mejor.", "Practica oral guiada.", "Confianza para pedir ayuda."]
+          },
+          trabajo: {
+            title: "Ingles para trabajo",
+            copy: "Para mejorar comunicacion profesional, reuniones, CV, entrevistas o atencion a clientes.",
+            points: ["Lenguaje laboral basico.", "Practica de presentaciones.", "Mejora de fluidez y comprension."]
+          }
+        }
+      },
+      {
+        id: "chino",
+        name: "Chino",
+        hook: "Para cultura, negocios, viaje y una habilidad diferencial.",
+        formats: ["grupal", "pregrabado"],
+        level: "Inicial",
+        reasons: {
+          hobby: {
+            title: "Chino por hobby",
+            copy: "Una forma guiada de entrar a un idioma distinto, con estructura y acompanamiento.",
+            points: ["Pronunciacion inicial.", "Caracteres y frases basicas.", "Progreso paso a paso."]
+          },
+          viaje: {
+            title: "Chino para viajar",
+            copy: "Base practica para reconocer expresiones y desenvolverte mejor en un viaje.",
+            points: ["Saludos y necesidades basicas.", "Compras, comida y traslados.", "Contexto cultural."]
+          },
+          trabajo: {
+            title: "Chino para trabajo",
+            copy: "Una habilidad de alto valor para comercio, tecnologia, turismo o relaciones internacionales.",
+            points: ["Base comunicativa inicial.", "Vocabulario profesional introductorio.", "Seguimiento para avanzar."]
+          }
+        }
+      },
+      {
+        id: "tailandes",
+        name: "Tailandes",
+        hook: "Para viaje, cultura, turismo y experiencias en Tailandia.",
+        formats: ["grupal"],
+        level: "Inicial",
+        reasons: {
+          hobby: {
+            title: "Tailandes por hobby",
+            copy: "Para acercarte a una cultura fascinante con una guia clara desde cero.",
+            points: ["Sonidos y frases iniciales.", "Vocabulario cotidiano.", "Cultura aplicada."]
+          },
+          viaje: {
+            title: "Tailandes para viajar",
+            copy: "Muy util si queres moverte con mas confianza y conectar mejor durante el viaje.",
+            points: ["Comida, compras y transporte.", "Frases de cortesia.", "Situaciones frecuentes."]
+          },
+          trabajo: {
+            title: "Tailandes para trabajo",
+            copy: "Ideal para turismo, hospitalidad o proyectos vinculados al sudeste asiatico.",
+            points: ["Primer vocabulario profesional.", "Comunicacion basica.", "Acompanamiento en vivo."]
+          }
+        }
+      },
+      {
+        id: "italiano",
+        name: "Italiano",
+        hook: "Para ciudadania, viaje, familia, cultura o trabajo.",
+        formats: ["grupal", "pregrabado"],
+        level: "Inicial y A2",
+        reasons: {
+          hobby: {
+            title: "Italiano por hobby",
+            copy: "Para conectar con cultura, musica, gastronomia, familia o ganas de aprender un idioma cercano.",
+            points: ["Conversacion inicial.", "Vocabulario cotidiano.", "Practica con correccion."]
+          },
+          viaje: {
+            title: "Italiano para viajar",
+            copy: "Enfocado en situaciones turisticas y comunicacion simple para disfrutar Italia con mas seguridad.",
+            points: ["Restaurantes, trenes y hoteles.", "Preguntas utiles.", "Pronunciacion guiada."]
+          },
+          trabajo: {
+            title: "Italiano para trabajo",
+            copy: "Para sumar una herramienta laboral o preparar procesos personales que requieren idioma.",
+            points: ["Base gramatical ordenada.", "Comunicacion formal simple.", "Seguimiento grupal."]
+          }
+        }
+      },
+      {
+        id: "aleman",
+        name: "Aleman",
+        hook: "Para estudio, trabajo, viaje o desafio personal.",
+        formats: ["grupal", "pregrabado"],
+        level: "Inicial y A2",
+        reasons: {
+          hobby: {
+            title: "Aleman por hobby",
+            copy: "Para aprender un idioma desafiante con estructura, practica y guia docente.",
+            points: ["Base desde cero.", "Pronunciacion y gramatica inicial.", "Ritmo sostenido."]
+          },
+          viaje: {
+            title: "Aleman para viajar",
+            copy: "Para manejar lo esencial en Alemania, Austria o Suiza en situaciones cotidianas.",
+            points: ["Transporte, comida y alojamiento.", "Frases de ayuda.", "Practica oral."]
+          },
+          trabajo: {
+            title: "Aleman para trabajo",
+            copy: "Un diferencial para estudio, migracion, oportunidades laborales o proyectos tecnicos.",
+            points: ["Base formal.", "Vocabulario profesional inicial.", "Seguimiento del avance."]
+          }
+        }
+      },
+      {
+        id: "ruso",
+        name: "Ruso",
+        hook: "Para cultura, viaje, desafio personal o sumar una habilidad diferencial.",
+        formats: ["grupal"],
+        level: "Inicial",
+        reasons: {
+          hobby: {
+            title: "Ruso por hobby",
+            copy: "Para acercarte a un idioma desafiante con una guia clara desde cero.",
+            points: ["Primer contacto con el alfabeto.", "Pronunciacion inicial.", "Ritmo acompanado para avanzar."]
+          },
+          viaje: {
+            title: "Ruso para viajar",
+            copy: "Para manejar expresiones basicas y entender mejor situaciones simples de viaje.",
+            points: ["Saludos y frases utiles.", "Lectura inicial.", "Mas seguridad para moverte."]
+          },
+          trabajo: {
+            title: "Ruso para trabajo",
+            copy: "Una base inicial para sumar una herramienta diferente a tu perfil academico o profesional.",
+            points: ["Base comunicativa.", "Vocabulario introductorio.", "Seguimiento grupal."]
+          }
+        }
+      }
+    ];
+
+    const scheduleByCountry = {
+      Argentina: ["Lunes 19:00 a 22:00", "Sabado 10:00 a 13:00"],
+      Uruguay: ["Lunes 19:00 a 22:00", "Sabado 10:00 a 13:00"],
+      Chile: ["Lunes 18:00 a 21:00", "Sabado 09:00 a 12:00"],
+      Peru: ["Lunes 17:00 a 20:00", "Sabado 08:00 a 11:00"],
+      Colombia: ["Lunes 17:00 a 20:00", "Sabado 08:00 a 11:00"],
+      Mexico: ["Lunes 16:00 a 19:00", "Sabado 09:00 a 12:00"],
+      Ecuador: ["Lunes 17:00 a 20:00", "Sabado 08:00 a 11:00"],
+      Espana: ["Martes 00:00 a 03:00", "Sabado 15:00 a 18:00"],
+      "Estados Unidos": ["Lunes 18:00 a 21:00 ET", "Sabado 10:00 a 13:00 ET"]
+    };
+
+    const monthSeats = {
+      Agosto: 2,
+      Septiembre: 5,
+      Octubre: 5
+    };
+
+    const countryHourOffset = {
+      Argentina: 0,
+      Uruguay: 0,
+      Chile: -1,
+      Peru: -2,
+      Colombia: -2,
+      Ecuador: -2,
+      Mexico: -3,
+      Espana: 5,
+      Otro: 0
+    };
+
+    const augustGroupSchedules = {
+      japones: [
+        { level: "Japones 3", day: "Lunes", start: "21:00", end: "00:00", date: "24-8", commission: "D", seats: 12 },
+        { level: "Japones 2", day: "Sabados", start: "16:00", end: "19:00", date: "22-8", commission: "D", seats: 5 },
+        { level: "Japones 2", day: "Domingos", start: "14:00", end: "17:00", date: "23-8", commission: "E", seats: 5 },
+        { level: "Japones 2", day: "Lunes", start: "21:00", end: "00:00", date: "24-8", commission: "F", seats: 7 },
+        { level: "Japones 3", day: "Sabados", start: "16:00", end: "19:00", date: "22-8", commission: "C", seats: 9 },
+        { level: "Japones 4", day: "Domingos", start: "14:00", end: "17:00", date: "23-8", commission: "A", seats: 14 },
+        { level: "Japones 1", day: "Miercoles", start: "21:00", end: "00:00", date: "19-8", commission: "W", seats: 15 }
+      ],
+      coreano: [
+        { level: "Coreano 1", day: "Sabados", start: "18:00", end: "19:00", date: "22-8", commission: "D", seats: 5 },
+        { level: "Coreano 1", day: "Lunes", start: "21:00", end: "00:00", date: "24-8", commission: "E", seats: 10 }
+      ],
+      tailandes: [
+        { level: "Tailandes 2", day: "Lunes", start: "21:00", end: "00:00", date: "24-8", commission: "B", seats: 10 },
+        { level: "Tailandes 3", day: "Domingos", start: "14:00", end: "17:00", date: "23-8", commission: "A", seats: 16 }
+      ],
+      ingles: [
+        { level: "Ingles A1", day: "Jueves", start: "20:00", end: "22:00", date: "20-8", commission: "C", seats: 3 },
+        { level: "Ingles A2", day: "Miercoles", start: "20:00", end: "22:00", date: "19-8", commission: "A", seats: 3 }
+      ],
+      chino: [
+        { level: "Chino 1", day: "Miercoles", start: "21:00", end: "00:00", date: "19-8", commission: "C", seats: 7 },
+        { level: "Chino 2", day: "Lunes", start: "21:00", end: "00:00", date: "24-8", commission: "D", seats: 10 }
+      ],
+      aleman: [
+        { level: "Aleman A2", day: "Domingos", start: "14:00", end: "17:00", date: "23-8", commission: "B", seats: 17 }
+      ],
+      italiano: [
+        { level: "Italiano A2", day: "Sabados", start: "17:00", end: "19:00", date: "22-8", commission: "A", seats: 17 },
+        { level: "Italiano A1", day: "Lunes", start: "20:00", end: "22:00", date: "24-8", commission: "B", seats: 11 }
+      ]
+    };
+
+    const septemberGroupSchedules = {
+      ingles: [
+        { level: "Ingles A1", day: "Sabados", start: "16:00", end: "18:00", date: "19-9", finish: "12-12", commission: "D", seats: 18 }
+      ],
+      japones: [
+        { level: "Japones 1", day: "Domingos", start: "14:00", end: "17:00", date: "20-9", finish: "13-12", commission: "T", seats: 14 },
+        { level: "Japones 1", day: "Lunes", start: "21:00", end: "00:00", date: "21-9", finish: "14-12", commission: "U", seats: 18 },
+        { level: "Japones 2", day: "Sabados", start: "14:00", end: "17:00", date: "19-9", finish: "12-12", commission: "G", seats: 19 },
+        { level: "Japones 2", day: "Jueves", start: "21:00", end: "00:00", date: "17-9", finish: "10-12", commission: "H", seats: 18 }
+      ],
+      aleman: [
+        { level: "Aleman A1", day: "Miercoles", start: "21:00", end: "00:00", date: "23-9", finish: "9-12", commission: "C", seats: 18 }
+      ],
+      ruso: [
+        { level: "Ruso 1", day: "Sabados", start: "16:00", end: "19:00", date: "19-9", finish: "12-12", commission: "A", seats: 18 }
+      ]
+    };
+
+    const octoberGroupSchedules = {
+      ingles: [
+        { level: "Ingles A1", day: "Sabados", start: "17:00", end: "19:00", date: "24-10", finish: "9-1", commission: "F", seats: 20 }
+      ],
+      coreano: [
+        { level: "Coreano 1", day: "Domingos", start: "14:00", end: "17:00", date: "18-10", finish: "10-1", commission: "F", seats: 19 }
+      ],
+      tailandes: [
+        { level: "Tailandes 1", day: "Sabados", start: "16:00", end: "19:00", date: "24-10", finish: "9-1", commission: "D", seats: 19 }
+      ],
+      chino: [
+        { level: "Chino 1", day: "Sabados", start: "16:00", end: "19:00", date: "24-10", finish: "9-1", commission: "D", seats: 20 }
+      ],
+      japones: [
+        { level: "Japones 1", day: "Miercoles", start: "21:00", end: "00:00", date: "21-10", finish: "13-1", commission: "V", seats: 20 }
+      ]
+    };
+
+    const pricingTables = {
+      standard5: {
+        months: 5,
+        hours: "3 hs",
+        quotas: 4,
+        cert: "Certificacion universitaria UAI segun curso",
+        ARG: { reg: "1.105.000", d40: "681.000" },
+        MEX: { reg: "10.340", d40: "6.440" },
+        USD: { reg: "527", d40: "330" }
+      },
+      tailandes4: {
+        months: 4,
+        hours: "3 hs",
+        quotas: 3,
+        cert: "Certificacion universitaria UAI segun curso",
+        ARG: { reg: "945.000", d40: "585.000" },
+        MEX: { reg: "8.720", d40: "5.460" },
+        USD: { reg: "445", d40: "281" }
+      },
+      ingles: {
+        months: 4,
+        hours: "3 hs",
+        quotas: 3,
+        cert: "Sin certificacion UAI",
+        no40: true,
+        ARG: { reg: "396.000" },
+        MEX: { reg: "3.650" },
+        USD: { reg: "185" }
+      },
+      italiano: {
+        months: 4,
+        hours: "3 hs",
+        quotas: 3,
+        cert: "Certificacion UAI incluida segun curso",
+        no40: true,
+        ARG: { reg: "442.000" },
+        MEX: { reg: "4.250" },
+        USD: { reg: "217" }
+      }
+    };
+
+    const onDemandCatalog = {
+      japones: {
+        classes: "13 clases grabadas",
+        access: "Acceso flexible para avanzar a tu ritmo",
+        includes: "Curso introductorio grabado, materiales de apoyo y ruta de estudio",
+        learns: "lectura inicial, pronunciacion, frases utiles y base cultural",
+        continuity: "Puede servir para empezar y luego evaluar continuidad en grupo",
+        priceNote: "Precio especial on demand"
+      },
+      coreano: {
+        classes: "11 clases grabadas",
+        access: "Acceso flexible para mirar, pausar y retomar",
+        includes: "Videos pregrabados, ejercicios y material de apoyo",
+        learns: "alfabeto coreano, pronunciacion, saludos y vocabulario cotidiano",
+        continuity: "Al finalizar podes consultar continuidad hacia el grupal",
+        priceNote: "Precio especial on demand"
+      },
+      chino: {
+        classes: "11 clases grabadas",
+        access: "Acceso flexible para entender la logica inicial del mandarin",
+        includes: "Videos pregrabados, practica de pronunciacion, Pinyin y material",
+        learns: "Pinyin, tonos, pronunciacion y primeras frases utiles",
+        continuity: "Al finalizar podes consultar continuidad hacia Chino 1 grupal",
+        priceNote: "Precio especial on demand"
+      },
+      aleman: {
+        classes: "11 clases grabadas",
+        access: "Acceso flexible para empezar desde cero sin horario fijo",
+        includes: "Videos pregrabados, material de apoyo y frases de uso cotidiano",
+        learns: "pronunciacion, frases cotidianas, presentacion personal y base gramatical",
+        continuity: "Al finalizar podes consultar continuidad hacia Aleman A1 grupal",
+        priceNote: "Precio especial on demand"
+      },
+      ingles: {
+        classes: "Clases grabadas segun programa",
+        access: "Ideal si necesitás practicar sin horario fijo",
+        includes: "Contenido grabado, practica y recorrido sugerido",
+        learns: "vocabulario practico, estructuras basicas y expresiones de uso real",
+        continuity: "ISA confirma el recorrido exacto disponible",
+        priceNote: "Precio on demand a confirmar con ISA"
+      },
+      italiano: {
+        classes: "Clases grabadas segun programa",
+        access: "Para avanzar con flexibilidad antes de viajar, rendir o retomar",
+        includes: "Contenido grabado, material y guia de estudio",
+        learns: "pronunciacion, situaciones de viaje, frases cotidianas y base inicial",
+        continuity: "ISA confirma el recorrido exacto disponible",
+        priceNote: "Precio on demand a confirmar con ISA"
+      },
+      default: {
+        classes: "Clases pregrabadas",
+        access: "Acceso flexible sin horario fijo",
+        includes: "Contenido grabado y material de apoyo",
+        learns: "bases del idioma, pronunciacion y vocabulario inicial",
+        priceNote: "Precio on demand a confirmar con ISA"
+      }
+    };
+
+    const onDemandPricing = {
+      ARG: {
+        symbol: "$",
+        regular: "187.000",
+        main: "153.000",
+        mainLabel: "Tarjeta de credito",
+        mainDetail: "3 cuotas sin interes",
+        transfer: "119.000",
+        transferLabel: "Pago unico por transferencia",
+        split: "2 cuotas por transferencia: primera minima de $88.600"
+      },
+      MEX: {
+        symbol: "$",
+        regular: "1.650",
+        main: "1.650",
+        mainLabel: "Tarjeta",
+        mainDetail: "3 cuotas sin interes",
+        transfer: "1.400",
+        transferLabel: "Transferencia",
+        split: "2 cuotas por transferencia: primera minima de $1.055 MXN",
+        suffix: " MXN"
+      },
+      USD: {
+        symbol: "USD ",
+        regular: "80",
+        main: "80",
+        mainLabel: "PayPal",
+        mainDetail: "Pago internacional",
+        transfer: "80",
+        transferLabel: "PayPal",
+        split: "2 pagos: primera minima de USD 60"
+      }
+    };
+
+    const courseDetails = {
+      default: {
+        duration: "Curso completo por modulos",
+        classTime: "Clase semanal de 3 horas",
+        groupSize: "Maximo 20 alumnos",
+        material: "Material de apoyo y seguimiento",
+        outcomes: [
+          ["Base ordenada", "Aprendes con un camino claro, sin depender de videos sueltos."],
+          ["Practica guiada", "Tenes profesor, grupo y espacio para consultar."],
+          ["Continuidad", "La cursada esta pensada para sostener ritmo y avanzar de nivel."]
+        ]
+      },
+      japones: {
+        duration: "Inicial y continuidad",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Lectura, escritura, practica oral y cultura",
+        outcomes: [
+          ["Primeras bases", "Hiragana, expresiones utiles, pronunciacion y estructura inicial."],
+          ["Cultura aplicada", "Entendes mejor situaciones reales, anime, viaje o intereses personales."],
+          ["Camino de nivel", "Ideal para empezar y seguir avanzando sin estudiar solo."]
+        ]
+      },
+      coreano: {
+        duration: "Nivel inicial",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Hangul, pronunciacion y practica cotidiana",
+        outcomes: [
+          ["Lectura inicial", "Primeros pasos para leer y reconocer expresiones basicas."],
+          ["Uso cotidiano", "Saludos, presentacion, compras y frases frecuentes."],
+          ["Ritmo grupal", "Acompanamiento para no abandonar despues del entusiasmo inicial."]
+        ]
+      },
+      ingles: {
+        duration: "Inicial e intermedio",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Conversacion, vocabulario y practica aplicada",
+        outcomes: [
+          ["Mas seguridad", "Practica para hablar y responder sin quedarse bloqueado."],
+          ["Uso real", "Viajes, trabajo, entrevistas o conversaciones cotidianas."],
+          ["Correccion", "El profesor puede corregir pronunciacion, estructura y fluidez."]
+        ]
+      },
+      italiano: {
+        duration: "Inicial y A2",
+        classTime: "3 horas por encuentro",
+        groupSize: "Maximo 20 alumnos",
+        material: "Conversacion, gramatica y pronunciacion",
+        outcomes: [
+          ["Base clara", "Estructura para empezar o retomar sin perderse."],
+          ["Uso en viaje", "Restaurantes, traslados, preguntas y situaciones simples."],
+          ["Practica acompanada", "Grupo reducido para consultar y mejorar pronunciacion."]
+        ]
+      }
+    };
+
+    const objections = [
+      {
+        id: "tiempo",
+        label: "No se si tengo tiempo",
+        title: "Elegir modalidad evita perder tiempo",
+        copy: "Si podes sostener un horario, el grupal te da ritmo y seguimiento. Si tu agenda cambia mucho, el pregrabado on demand puede ser mejor.",
+        points: ["Grupal: clase semanal de 3 horas.", "Pregrabado: acceso flexible.", "WhatsApp: ISA puede ayudarte a elegir segun tu rutina."]
+      },
+      {
+        id: "nivel",
+        label: "No se mi nivel",
+        title: "No tenes que adivinar tu nivel",
+        copy: "La idea es ubicarte bien antes de reservar para que no entres a un grupo que te quede muy facil o muy dificil.",
+        points: ["Miramos si empezas desde cero o venis con base.", "Te orientamos al grupo correcto.", "La reserva se confirma con asesoramiento."]
+      },
+      {
+        id: "ritmo",
+        label: "Me da miedo no seguir el ritmo",
+        title: "Por eso trabajamos con grupos chicos",
+        copy: "El maximo de 20 alumnos ayuda a que puedas consultar, participar y recibir seguimiento durante la cursada.",
+        points: ["Profesor en vivo.", "Espacio para dudas.", "Material para repasar entre clases."]
+      },
+      {
+        id: "dinero",
+        label: "No quiero perder dinero",
+        title: "Primero elegimos bien, despues reservas",
+        copy: "Antes de avanzar ves modalidad, horario, pais, cupos y que incluye. La asesora confirma la opcion antes de cerrar la reserva.",
+        points: ["Curso completo, no partes sueltas.", "Cupos reales por mes.", "Cuotas o beneficios solo si aplican."]
+      }
+    ];
+
+    let selectedCourse = courses[0];
+    let selectedReason = "hobby";
+    let selectedFormat = "grupal";
+    let selectedScheduleIndex = 0;
+    let legacyScheduleIndex = 0;
+    let selectedObjection = objections[0];
+
+    const courseGrid = document.getElementById("courseGrid");
+    const reasonBox = document.getElementById("reasonBox");
+    const offerGrid = document.getElementById("offerGrid");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailIntro = document.getElementById("detailIntro");
+    const factGrid = document.getElementById("factGrid");
+    const levelList = document.getElementById("levelList");
+    const objectionList = document.getElementById("objectionList");
+    const answerBox = document.getElementById("answerBox");
+    const selectedTitle = document.getElementById("selectedTitle");
+    const countrySelect = document.getElementById("countrySelect");
+    const monthSelect = document.getElementById("monthSelect");
+    const scheduleList = document.getElementById("scheduleList");
+    const topWhatsApp = document.getElementById("topWhatsApp");
+    const benefitsWhatsApp = document.getElementById("benefitsWhatsApp");
+    const bottomWhatsApp = document.getElementById("bottomWhatsApp");
+    const stickyWhatsApp = document.getElementById("stickyWhatsApp");
+    const guideStepper = document.getElementById("guideStepper");
+    const guideCourses = document.getElementById("guideCourses");
+    const guideReasonHeading = document.getElementById("guideReasonHeading");
+    const guideReasonLead = document.getElementById("guideReasonLead");
+    const guideReasons = document.getElementById("guideReasons");
+    const guideReasonInfo = document.getElementById("guideReasonInfo");
+    const guideFormats = document.getElementById("guideFormats");
+    const guideFormatInfo = document.getElementById("guideFormatInfo");
+    const guideCountry = document.getElementById("guideCountry");
+    const guideMonth = document.getElementById("guideMonth");
+    const guideSchedules = document.getElementById("guideSchedules");
+    const guideObjections = document.getElementById("guideObjections");
+    const guideAnswer = document.getElementById("guideAnswer");
+    const guideSummary = document.getElementById("guideSummary");
+    const guideWhatsApp = document.getElementById("guideWhatsApp");
+    const quoteResult = document.getElementById("quoteResult");
+    const guideBack = document.getElementById("guideBack");
+    const guideNext = document.getElementById("guideNext");
+    let guideStep = 0;
+
+    function renderCourses() {
+      courseGrid.innerHTML = courses.map((course) => `
+        <button class="course-card ${course.id === selectedCourse.id ? "active" : ""}" type="button" data-course="${course.id}">
+          <span class="course-top">
+            <span class="course-name">${course.name}</span>
+            <span class="badge">${course.level}</span>
+          </span>
+          <p>${course.hook}</p>
+          <span class="formats">
+            ${course.formats.map((format) => `<span class="pill">${format === "grupal" ? "Grupal en vivo" : "Pregrabado on demand"}</span>`).join("")}
+          </span>
+        </button>
+      `).join("");
+
+      document.querySelectorAll("[data-course]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedCourse = courses.find((course) => course.id === button.dataset.course);
+          selectedFormat = selectedCourse.formats[0];
+          selectedScheduleIndex = 0;
+          renderAll();
+          document.getElementById("recorrido").scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    }
+
+    function renderReason() {
+      const reason = selectedCourse.reasons[selectedReason];
+      selectedTitle.textContent = `${selectedCourse.name}: elegi segun tu objetivo`;
+      reasonBox.innerHTML = `
+        <h3>${reason.title}</h3>
+        <p>${reason.copy}</p>
+        <ul>${reason.points.map((point) => `<li>${point}</li>`).join("")}</ul>
+      `;
+
+      document.querySelectorAll("[data-reason]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.reason === selectedReason);
+      });
+    }
+
+    function renderOffers() {
+      const hasGroup = selectedCourse.formats.includes("grupal");
+      const hasRecorded = selectedCourse.formats.includes("pregrabado");
+      offerGrid.innerHTML = `
+        <article class="offer ${hasGroup ? "" : "disabled"}">
+          <span class="label">${hasGroup ? "Disponible" : "Consultar disponibilidad"}</span>
+          <h3>Grupal en vivo</h3>
+          <p>Para quienes quieren profesor, grupo, seguimiento y fechas concretas para avanzar.</p>
+          <ul>
+            <li>Maximo 20 alumnos.</li>
+            <li>Horarios por pais.</li>
+            <li>Material y beneficios de cursada.</li>
+          </ul>
+          <button class="mini-action primary-link" type="button" data-format="grupal" ${hasGroup ? "" : "disabled"}>Quiero grupal</button>
+        </article>
+        <article class="offer ${hasRecorded ? "" : "disabled"}">
+          <span class="label">${hasRecorded ? "Disponible" : "No disponible ahora"}</span>
+          <h3>Pregrabado on demand</h3>
+          <p>Para quienes necesitan estudiar a su ritmo y no pueden comprometerse con un horario fijo.</p>
+          <ul>
+            <li>Clases grabadas organizadas por modulo.</li>
+            <li>Material de practica incluido.</li>
+            <li>Acceso flexible para avanzar cuando puedas.</li>
+          </ul>
+          <button class="mini-action primary-link" type="button" data-format="pregrabado" ${hasRecorded ? "" : "disabled"}>Quiero pregrabado</button>
+        </article>
+      `;
+
+      document.querySelectorAll("[data-format]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedFormat = button.dataset.format;
+          renderCourseDetail();
+          updateWhatsAppLinks();
+          if (selectedFormat === "grupal") {
+            document.getElementById("grupal").scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    }
+
+    function getDetail() {
+      return courseDetails[selectedCourse.id] || courseDetails.default;
+    }
+
+    function renderCourseDetail() {
+      const detail = getDetail();
+      const reason = selectedCourse.reasons[selectedReason];
+      const formatLabel = selectedFormat === "grupal" ? "curso grupal en vivo" : "curso pregrabado on demand";
+      detailTitle.textContent = `${selectedCourse.name}: ${formatLabel}`;
+      detailIntro.textContent = `${reason.title}. ${reason.copy}`;
+      factGrid.innerHTML = `
+        <div class="fact"><span>Duracion</span><strong>${detail.duration}</strong></div>
+        <div class="fact"><span>Clase</span><strong>${selectedFormat === "grupal" ? detail.classTime : "Acceso flexible"}</strong></div>
+        <div class="fact"><span>Grupo</span><strong>${selectedFormat === "grupal" ? detail.groupSize : "Sin grupo fijo"}</strong></div>
+        <div class="fact"><span>Incluye</span><strong>${detail.material}</strong></div>
+      `;
+      levelList.innerHTML = detail.outcomes.map(([title, copy]) => `
+        <div><strong>${title}</strong><p>${copy}</p></div>
+      `).join("");
+    }
+
+    function renderObjections() {
+      objectionList.innerHTML = objections.map((item) => `
+        <button type="button" class="${item.id === selectedObjection.id ? "active" : ""}" data-objection="${item.id}">${item.label}</button>
+      `).join("");
+      answerBox.innerHTML = `
+        <h3>${selectedObjection.title}</h3>
+        <p>${selectedObjection.copy}</p>
+        <ul>${selectedObjection.points.map((point) => `<li>${point}</li>`).join("")}</ul>
+      `;
+      document.querySelectorAll("[data-objection]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedObjection = objections.find((item) => item.id === button.dataset.objection);
+          renderObjections();
+          updateWhatsAppLinks();
+        });
+      });
+    }
+
+    function hasUaiCertificate(course, format = selectedFormat) {
+      return format === "grupal" && course.id !== "ingles" && course.formats.includes("grupal");
+    }
+
+    function getCourseTags(course) {
+      const tags = [];
+      if (course.formats.includes("grupal")) tags.push("En vivo");
+      if (course.formats.includes("pregrabado")) tags.push("On demand");
+      if (hasUaiCertificate(course, "grupal")) tags.push("Certificado UAI");
+      return tags;
+    }
+
+    function renderCertificateCard(price) {
+      if (!hasUaiCertificate(selectedCourse)) return "";
+      return `
+        <div class="certificate-card">
+          <div class="certificate-thumb" aria-hidden="true"></div>
+          <div>
+            <strong>Incluye certificado UAI</strong>
+            <p>${price.cert}. ISA te confirma el alcance segun el curso y nivel elegido.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function getOnDemandOffer(course = selectedCourse) {
+      return onDemandCatalog[course.id] || onDemandCatalog.default;
+    }
+
+    function getOnDemandPrice(country = countrySelect.value) {
+      const key = getPriceCountryKey(country);
+      return onDemandPricing[key] || onDemandPricing.USD;
+    }
+
+    function formatOnDemandAmount(price, value) {
+      return `${price.symbol}${value}${price.suffix || ""}`;
+    }
+
+    function renderModalityDetail() {
+      const offer = getOnDemandOffer();
+      if (selectedFormat === "pregrabado") {
+        return `
+          <div class="modality-detail">
+            <h4>Que incluye ${selectedCourse.name} on demand</h4>
+            <p>Es para estudiar sin horario fijo, repasar cuando quieras y avanzar antes de hablar con ISA sobre continuidad.</p>
+            <div class="benefit-list">
+              <div><span>Clases</span><strong>${offer.classes}</strong></div>
+              <div><span>Incluye</span><strong>${offer.includes}</strong></div>
+              <div><span>Aprendes</span><strong>${offer.learns}</strong></div>
+              <div><span>Ritmo</span><strong>${offer.access}</strong></div>
+            </div>
+          </div>
+        `;
+      }
+      return `
+        <div class="modality-detail">
+          <h4>Beneficios del grupal en vivo</h4>
+          <p>Es para avanzar con profesor, grupo reducido y una estructura clara segun tu nivel.</p>
+          <div class="benefit-list">
+            <div><span>Nivel</span><strong>${selectedCourse.level}. ISA confirma si ese grupo es el correcto para vos.</strong></div>
+            <div><span>Clase</span><strong>Una clase online semanal de 3 horas. Se reserva el curso completo.</strong></div>
+            <div><span>Grupo</span><strong>Maximo 20 alumnos para poder consultar, practicar y recibir seguimiento.</strong></div>
+            <div><span>Extra</span><strong>${hasUaiCertificate(selectedCourse, "grupal") ? "Incluye certificacion UAI segun curso y nivel." : "Incluye acompanamiento academico y recorrido ordenado."}</strong></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderOnDemandQuote(reasonText) {
+      const offer = getOnDemandOffer();
+      const odPrice = getOnDemandPrice();
+      const mainAmount = formatOnDemandAmount(odPrice, odPrice.main);
+      const regularAmount = formatOnDemandAmount(odPrice, odPrice.regular);
+      const transferAmount = formatOnDemandAmount(odPrice, odPrice.transfer);
+      return `
+        <span class="label">Opcion pregrabada</span>
+        <h4>${selectedCourse.name} on demand</h4>
+        <p>Te conviene ${reasonText}. Es una opcion pregrabada: no depende de grupo, horario ni cupo de cursada en vivo.</p>
+        <div class="price-hero">
+          <span>Precio del pregrabado</span>
+          <strong>${mainAmount}</strong>
+          <small>${odPrice.mainLabel}: ${odPrice.mainDetail}. Pago unico: ${transferAmount}.</small>
+          <div class="discount-pill">On demand</div>
+        </div>
+        <div class="quick-close-strip">
+          <div><span>Formato</span><strong>Pregrabado</strong></div>
+          <div><span>Clases</span><strong>${offer.classes}</strong></div>
+          <div><span>Aprendes</span><strong>${offer.learns}</strong></div>
+        </div>
+        <ul>
+          <li>${offer.access}.</li>
+          <li>${offer.includes}.</li>
+          <li>Aprendes ${offer.learns}.</li>
+          <li>${offer.continuity || "ISA confirma el recorrido exacto disponible"}.</li>
+        </ul>
+        <div class="price-breakdown">
+          <div class="price-line"><span>Tipo de curso</span><strong>Pregrabado on demand</strong></div>
+          <div class="price-line"><span>Valor regular</span><strong class="muted-price">${regularAmount}</strong></div>
+          <div class="price-line"><span>${odPrice.mainLabel}</span><strong>${mainAmount}</strong></div>
+          <div class="price-line"><span>${odPrice.transferLabel}</span><strong>${transferAmount}</strong></div>
+          <div class="price-line"><span>Financiacion</span><strong>${odPrice.split}</strong></div>
+          <div class="price-line"><span>Profesor en vivo</span><strong>No incluido</strong></div>
+          <div class="price-line"><span>Cupo grupal</span><strong>No aplica</strong></div>
+        </div>
+      `;
+    }
+
+    function renderGuide() {
+      const stepLabels = ["Idioma", "Uso", "Opcion", "Reserva"];
+      guideStepper.innerHTML = stepLabels.map((label, index) => `<button class="step-dot ${index === guideStep ? "active" : ""}" type="button" data-guide-step-target="${index}">${index + 1}. ${label}</button>`).join("");
+      document.querySelectorAll("[data-guide-step]").forEach((step) => {
+        step.classList.toggle("active", Number(step.dataset.guideStep) === guideStep);
+      });
+      guideBack.disabled = guideStep === 0;
+      guideNext.textContent = guideStep === 3 ? "Enviar a ISA" : "Siguiente";
+
+      guideCourses.innerHTML = courses.map((course) => `
+        <button class="choice-card ${course.id === selectedCourse.id ? "active" : ""}" type="button" data-guide-course="${course.id}">
+          <strong>${course.name}</strong>
+        </button>
+      `).join("");
+
+      guideReasonHeading.textContent = `2. Que uso le queres dar a ${selectedCourse.name}?`;
+      guideReasonLead.textContent = "Elegis una opcion y abajo ves la recomendacion justa, sin vueltas.";
+
+      const reasonLabels = {
+        hobby: "Hobby",
+        viaje: "Viaje",
+        trabajo: "Trabajo"
+      };
+      const reasonFocus = {
+        hobby: "Lo que vas a disfrutar",
+        viaje: "Lo que vas a resolver",
+        trabajo: "Lo que vas a sumar"
+      };
+      const reasonPointLabels = {
+        hobby: ["Interes real", "Ritmo", "Acompanamiento"],
+        viaje: ["Situaciones utiles", "Cultura", "Seguridad"],
+        trabajo: ["Herramienta", "Base ordenada", "Progreso"]
+      };
+      const reasons = ["hobby", "viaje", "trabajo"].map((id) => {
+        const reason = selectedCourse.reasons[id];
+        const shortCopy = reason.copy.length > 112 ? `${reason.copy.slice(0, 109)}...` : reason.copy;
+        return [id, reasonLabels[id], shortCopy];
+      });
+      guideReasons.innerHTML = reasons.map(([id, title, copy]) => `
+        <button class="choice-card ${selectedReason === id ? "active" : ""}" type="button" data-guide-reason="${id}">
+          <strong>${title}</strong>
+          <span>${copy}</span>
+          <span class="mini-tag">${id === "hobby" ? "Disfrutar" : id === "viaje" ? "Resolver" : "Crecer"}</span>
+        </button>
+      `).join("");
+
+      const reason = selectedCourse.reasons[selectedReason];
+      guideReasonInfo.innerHTML = `
+        <div class="info-row"><strong>${reason.title}</strong><p>${reason.copy}</p></div>
+        ${reason.points.map((point, index) => `<div class="info-row"><strong>${reasonPointLabels[selectedReason][index] || reasonFocus[selectedReason]}</strong><p>${point}</p></div>`).join("")}
+      `;
+
+      const hasGroup = selectedCourse.formats.includes("grupal");
+      const hasRecorded = selectedCourse.formats.includes("pregrabado");
+      guideFormats.innerHTML = `
+        <button class="choice-card route-live ${selectedFormat === "grupal" ? "active" : ""}" type="button" data-guide-format="grupal" ${hasGroup ? "" : "disabled"}>
+          <strong>Grupal en vivo</strong>
+          <span>Para estudiar con profesor, grupo, clase semanal de 3 horas, cupos y seguimiento.</span>
+          <span class="mini-tag">${hasUaiCertificate(selectedCourse, "grupal") ? "Certificado UAI" : "Sin UAI"}</span>
+        </button>
+        <button class="choice-card route-ondemand ${selectedFormat === "pregrabado" ? "active" : ""}" type="button" data-guide-format="pregrabado" ${hasRecorded ? "" : "disabled"}>
+          <strong>Pregrabado on demand</strong>
+          <span>Para acceder a clases grabadas, estudiar a tu ritmo y no depender de horarios.</span>
+          <span class="mini-tag">Precio propio</span>
+        </button>
+      `;
+      guideFormatInfo.innerHTML = renderModalityDetail();
+
+      guideCountry.innerHTML = Object.keys(scheduleByCountry).map((country) => `<option value="${country}">${country}</option>`).join("");
+      guideCountry.value = countrySelect.value;
+      const availableGuideMonths = selectedCourse.id === "ruso" ? ["Septiembre"] : ["Agosto", "Septiembre", "Octubre"];
+      if (!availableGuideMonths.includes(monthSelect.value)) {
+        monthSelect.value = availableGuideMonths[0];
+      }
+      guideMonth.innerHTML = availableGuideMonths.map((month) => `<option value="${month}">${month}</option>`).join("");
+      guideMonth.value = monthSelect.value;
+
+      renderGuideSchedules();
+      renderGuideSummary();
+
+      document.querySelectorAll("[data-guide-course]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedCourse = courses.find((course) => course.id === button.dataset.guideCourse);
+          selectedFormat = selectedCourse.formats[0];
+          selectedScheduleIndex = 0;
+          renderAll();
+        });
+      });
+      document.querySelectorAll("[data-guide-reason]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedReason = button.dataset.guideReason;
+          renderAll();
+        });
+      });
+      document.querySelectorAll("[data-guide-format]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedFormat = button.dataset.guideFormat;
+          renderAll();
+        });
+      });
+      document.querySelectorAll("[data-guide-step-target]").forEach((button) => {
+        button.addEventListener("click", () => {
+          guideStep = Number(button.dataset.guideStepTarget);
+          renderGuide();
+        });
+      });
+    }
+
+    function renderGuideSchedules() {
+      const country = guideCountry.value || countrySelect.value;
+      const month = guideMonth.value || monthSelect.value;
+      const schedules = getCourseSchedules(selectedCourse.id, country, month);
+      if (selectedScheduleIndex >= schedules.length) selectedScheduleIndex = 0;
+      guideSchedules.innerHTML = selectedFormat === "grupal"
+        ? schedules.map((item, index) => `
+          <button class="schedule-row ${index === selectedScheduleIndex ? "active" : ""}" type="button" data-guide-schedule="${index}">
+            <strong>${item.month}</strong>
+            <span class="schedule-main"><b>${item.level} - ${item.time}</b> <span>Inicio ${item.date}.${item.finish ? ` Finaliza ${item.finish}.` : ""} Comision ${item.commission}. Clase online en vivo. Se reserva el curso completo.</span></span>
+            <span class="seats">Quedan ${item.seats} cupos</span>
+          </button>
+        `).join("")
+        : `<div class="info-row"><strong>On demand pregrabado</strong><p>No hay horario ni cupo grupal. ISA confirma precio vigente, cantidad de clases grabadas, acceso y contenido incluido.</p></div>`;
+      document.querySelectorAll("[data-guide-schedule]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedScheduleIndex = Number(button.dataset.guideSchedule);
+          renderAll();
+        });
+      });
+    }
+
+    function dayToIndex(day) {
+      const normalized = day.toLowerCase();
+      if (normalized.startsWith("lunes")) return 0;
+      if (normalized.startsWith("martes")) return 1;
+      if (normalized.startsWith("miercoles")) return 2;
+      if (normalized.startsWith("jueves")) return 3;
+      if (normalized.startsWith("viernes")) return 4;
+      if (normalized.startsWith("sabado")) return 5;
+      if (normalized.startsWith("domingo")) return 6;
+      return 0;
+    }
+
+    function indexToDay(index) {
+      return ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabados", "Domingos"][(index + 7) % 7];
+    }
+
+    function parseHour(time) {
+      const [hour, minute] = time.split(":").map(Number);
+      return { hour, minute };
+    }
+
+    function shiftTime(day, time, offset) {
+      const parsed = parseHour(time);
+      let total = parsed.hour * 60 + parsed.minute + offset * 60;
+      let dayShift = 0;
+      while (total < 0) {
+        total += 1440;
+        dayShift -= 1;
+      }
+      while (total >= 1440) {
+        total -= 1440;
+        dayShift += 1;
+      }
+      const hour = String(Math.floor(total / 60)).padStart(2, "0");
+      const minute = String(total % 60).padStart(2, "0");
+      return { day: indexToDay(dayToIndex(day) + dayShift), time: `${hour}:${minute}` };
+    }
+
+    function formatScheduleTime(item, country) {
+      const offset = countryHourOffset[country] || 0;
+      if (offset === 0) return `${item.day} ${item.start} a ${item.end}`;
+      const startMinutes = parseHour(item.start).hour * 60 + parseHour(item.start).minute;
+      const endMinutes = parseHour(item.end).hour * 60 + parseHour(item.end).minute;
+      const endBaseDay = endMinutes <= startMinutes ? indexToDay(dayToIndex(item.day) + 1) : item.day;
+      const start = shiftTime(item.day, item.start, offset);
+      const end = shiftTime(endBaseDay, item.end, offset);
+      const dayLabel = start.day === end.day ? start.day : `${start.day} a ${end.day}`;
+      return `${dayLabel} ${start.time} a ${end.time}`;
+    }
+
+    function getCourseSchedules(courseId, country, month) {
+      if (month === "Agosto" && augustGroupSchedules[courseId]) {
+        return augustGroupSchedules[courseId]
+          .filter((item) => item.seats > 0)
+          .map((item) => ({
+            ...item,
+            month,
+            time: formatScheduleTime(item, country)
+          }));
+      }
+      if (month === "Septiembre" && septemberGroupSchedules[courseId]) {
+        return septemberGroupSchedules[courseId]
+          .filter((item) => item.seats > 0)
+          .map((item) => ({
+            ...item,
+            month,
+            time: formatScheduleTime(item, country)
+          }));
+      }
+      if (month === "Octubre" && octoberGroupSchedules[courseId]) {
+        return octoberGroupSchedules[courseId]
+          .filter((item) => item.seats > 0)
+          .map((item) => ({
+            ...item,
+            month,
+            time: formatScheduleTime(item, country)
+          }));
+      }
+      const times = scheduleByCountry[country] || scheduleByCountry.Argentina;
+      const seats = monthSeats[month];
+      return times.map((time, index) => ({
+        level: `${selectedCourse.name} - grupo disponible ${index + 1}`,
+        month,
+        time,
+        date: month === "Septiembre" ? "consultar" : "consultar",
+        commission: "a confirmar",
+        seats
+      }));
+    }
+
+    function getPriceCountryKey(country) {
+      if (country === "Argentina" || country === "Uruguay") return "ARG";
+      if (country === "Mexico") return "MEX";
+      return "USD";
+    }
+
+    function getPriceSymbol(key) {
+      return key === "USD" ? "USD " : "$";
+    }
+
+    function parseMoney(value) {
+      return Number(String(value || "0").replace(/\./g, "").replace(",", "."));
+    }
+
+    function formatMoney(num) {
+      return Math.round(num).toLocaleString("es-AR");
+    }
+
+    function getPricingKey(courseId) {
+      if (courseId === "ingles") return "ingles";
+      if (courseId === "italiano") return "italiano";
+      if (courseId === "tailandes" && monthSelect.value === "Agosto") return "tailandes4";
+      if (monthSelect.value === "Septiembre" && ["japones", "aleman", "ruso"].includes(courseId)) return "tailandes4";
+      if (monthSelect.value === "Octubre" && ["japones", "coreano", "tailandes", "chino"].includes(courseId)) return "tailandes4";
+      return "standard5";
+    }
+
+    function getQuotePrice() {
+      const countryKey = getPriceCountryKey(countrySelect.value);
+      const table = pricingTables[getPricingKey(selectedCourse.id)];
+      const row = table[countryKey] || table.USD;
+      const symbol = getPriceSymbol(countryKey);
+      const regular = parseMoney(row.reg);
+      const applies40 = !table.no40;
+      const finalRaw = applies40 ? (row.d40 ? parseMoney(row.d40) : Math.round(regular * 0.6)) : regular;
+      const monthlyRegular = regular / table.months;
+      const monthlyFinal = finalRaw / table.months;
+      const quota = finalRaw / table.quotas;
+      return {
+        symbol,
+        regular,
+        finalRaw,
+        monthlyRegular,
+        monthlyFinal,
+        quota,
+        months: table.months,
+        quotas: table.quotas,
+        hours: table.hours,
+        cert: table.cert,
+        applies40,
+        discountLabel: applies40 ? "40% OFF aplicado" : "Precio regular vigente",
+        discountDetail: applies40
+          ? "Se descuenta el 40% sobre el valor regular del curso."
+          : "Este idioma no entra en la promo del 40%."
+      };
+    }
+
+    function renderGuideSummary() {
+      const country = countrySelect.value;
+      const month = monthSelect.value;
+      const schedules = getCourseSchedules(selectedCourse.id, country, month);
+      if (selectedScheduleIndex >= schedules.length) selectedScheduleIndex = 0;
+      const selectedSchedule = schedules[selectedScheduleIndex] || schedules[0];
+      const schedule = selectedFormat === "grupal" && selectedSchedule ? `${selectedSchedule.level} - ${selectedSchedule.time}` : "Sin horario fijo";
+      const seats = selectedFormat === "grupal" && selectedSchedule ? selectedSchedule.seats : monthSeats[month];
+      const price = getQuotePrice();
+      const onDemand = getOnDemandOffer();
+      const onDemandPrice = getOnDemandPrice();
+      const reasonLabel = selectedReason === "hobby" ? "Hobby" : selectedReason === "viaje" ? "Viaje" : "Trabajo";
+      const formatLabel = selectedFormat === "grupal" ? "Grupal en vivo" : "Pregrabado on demand";
+      guideSummary.innerHTML = `
+        <div class="summary-item"><span>Curso</span><strong>${selectedCourse.name}</strong></div>
+        <div class="summary-item"><span>Objetivo</span><strong>${reasonLabel}</strong></div>
+        <div class="summary-item"><span>Modalidad</span><strong>${formatLabel}</strong></div>
+        <div class="summary-item"><span>${selectedFormat === "grupal" ? "Horario" : "Acceso"}</span><strong>${selectedFormat === "grupal" ? `${month} - ${schedule}` : "Sin horario fijo"}</strong></div>
+        <div class="summary-item"><span>Precio</span><strong>${selectedFormat === "grupal" ? `${price.symbol}${formatMoney(price.finalRaw)}` : formatOnDemandAmount(onDemandPrice, onDemandPrice.main)}</strong></div>
+      `;
+      const reasonText = selectedReason === "hobby"
+        ? "porque te ayuda a sostener el entusiasmo y avanzar con una guia clara"
+        : selectedReason === "viaje"
+          ? "porque enfoca el aprendizaje en situaciones reales de viaje"
+          : "porque te da una base ordenada para usar el idioma como herramienta profesional";
+      quoteResult.innerHTML = selectedFormat === "grupal" ? `
+        <span class="label">Opcion recomendada</span>
+        <h4>${selectedCourse.name} ${formatLabel} - ${month}</h4>
+        <p>Te conviene ${reasonText}. El grupo seleccionado tiene clase online en vivo de 3 horas y se reserva como curso completo.</p>
+        <div class="price-hero">
+          <span>Tu cotizacion para reservar con ISA</span>
+          <strong>${price.symbol}${formatMoney(price.finalRaw)}</strong>
+          <small>${price.quotas} cuotas sin interes de ${price.symbol}${formatMoney(price.quota)}. Mensualidad estimada: ${price.symbol}${formatMoney(price.monthlyFinal)}.</small>
+          <div class="discount-pill">${price.discountLabel}</div>
+        </div>
+        <div class="quick-close-strip">
+          <div><span>Cupo</span><strong>${seats} disponibles</strong></div>
+          <div><span>Clase</span><strong>3 horas en vivo</strong></div>
+          <div><span>Grupo</span><strong>Max. 20 alumnos</strong></div>
+        </div>
+        ${renderCertificateCard(price)}
+        <ul>
+          <li>${schedule}</li>
+          <li>No queremos que pierdas tiempo ni dinero: ISA confirma nivel, cupo y si esta opcion es la correcta antes de reservar.</li>
+        </ul>
+        <div class="price-breakdown">
+          <div class="price-line"><span>Precio regular del curso</span><strong class="${price.applies40 ? "muted-price" : ""}">${price.symbol}${formatMoney(price.regular)}</strong></div>
+          <div class="price-line"><span>Matricula</span><strong>Incluida</strong></div>
+          <div class="price-line"><span>Mensual regular (${price.months} meses)</span><strong>${price.symbol}${formatMoney(price.monthlyRegular)}</strong></div>
+          <div class="price-line"><span>Certificados</span><strong>${price.cert}</strong></div>
+          <div class="price-line"><span>Beneficio</span><strong>${price.discountDetail}</strong></div>
+          <div class="price-line"><span>Mensual con beneficio</span><strong>${price.symbol}${formatMoney(price.monthlyFinal)}</strong></div>
+          <div class="price-line total"><span>Total a reservar con ISA</span><strong>${price.symbol}${formatMoney(price.finalRaw)}</strong></div>
+          <div class="price-line"><span>Cuotas sin interes</span><strong>${price.quotas} x ${price.symbol}${formatMoney(price.quota)}</strong></div>
+        </div>
+      ` : renderOnDemandQuote(reasonText);
+    }
+
+    function renderSchedule() {
+      const country = countrySelect.value;
+      const month = monthSelect.value;
+      const seats = monthSeats[month];
+      const times = scheduleByCountry[country] || scheduleByCountry.Argentina;
+      const activeScheduleIndex = legacyScheduleIndex >= times.length ? 0 : legacyScheduleIndex;
+      scheduleList.innerHTML = times.map((time, index) => `
+        <button class="schedule-row ${index === activeScheduleIndex ? "active" : ""}" type="button" data-schedule="${index}">
+          <strong>${month}</strong>
+          <span class="schedule-main">
+            <b>${selectedCourse.name} - grupo disponible ${index + 1}</b>
+            <span>${time}. Clase online en vivo de 3 horas. Se reserva el curso completo.</span>
+          </span>
+          <span class="seats">Quedan ${seats} cupos</span>
+        </button>
+      `).join("");
+      document.querySelectorAll("[data-schedule]").forEach((button) => {
+        button.addEventListener("click", () => {
+          legacyScheduleIndex = Number(button.dataset.schedule);
+          renderSchedule();
+          updateWhatsAppLinks();
+        });
+      });
+    }
+
+    function buildWhatsAppUrl() {
+      const country = countrySelect.value;
+      const month = monthSelect.value;
+      const schedules = getCourseSchedules(selectedCourse.id, country, month);
+      const selectedSchedule = schedules[selectedScheduleIndex] || schedules[0];
+      const schedule = selectedSchedule ? `${selectedSchedule.level}, ${selectedSchedule.time}, inicio ${selectedSchedule.date}${selectedSchedule.finish ? `, finaliza ${selectedSchedule.finish}` : ""}, comision ${selectedSchedule.commission}, quedan ${selectedSchedule.seats} cupos` : "sin horario seleccionado";
+      const price = getQuotePrice();
+      const onDemand = getOnDemandOffer();
+      const onDemandPrice = getOnDemandPrice();
+      const reason = selectedReason === "hobby" ? "hobby" : selectedReason === "viaje" ? "viaje" : "trabajo";
+      const format = selectedFormat === "grupal" ? "curso grupal en vivo" : "curso pregrabado on demand";
+      const scheduleText = selectedFormat === "grupal" ? ` Me interesa el grupo de ${month}, ${schedule}.` : "";
+      const certificateText = selectedFormat === "grupal" && hasUaiCertificate(selectedCourse) ? " Vi que incluye certificado UAI segun curso." : "";
+      const priceText = selectedFormat === "grupal" ? ` La cotizacion que vi es: precio regular ${price.symbol}${formatMoney(price.regular)}, beneficio ${price.discountLabel}, total ${price.symbol}${formatMoney(price.finalRaw)} y ${price.quotas} cuotas de ${price.symbol}${formatMoney(price.quota)}.` : "";
+      const onDemandText = selectedFormat === "pregrabado" ? ` Vi la opcion pregrabada: ${onDemand.classes}, ${onDemand.access}. Precio visto: ${formatOnDemandAmount(onDemandPrice, onDemandPrice.main)} por ${onDemandPrice.mainLabel}; pago unico ${formatOnDemandAmount(onDemandPrice, onDemandPrice.transfer)}. Quiero que me confirmes acceso, contenido incluido y pasos de reserva.` : "";
+      const text = `Hola ISA, arme mi cotizacion en la pagina de IKARUGA. Me interesa ${selectedCourse.name} por ${reason}. Elegi ${format}, estudiaria desde ${country} y quiero revisar ${month}.${scheduleText}${priceText}${certificateText}${onDemandText} Quiero que me confirmes si puedo reservar esta opcion.`;
+      const base = WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}` : "https://wa.me/";
+      return `${base}?text=${encodeURIComponent(text)}`;
+    }
+
+    function updateWhatsAppLinks() {
+      const url = buildWhatsAppUrl();
+      topWhatsApp.href = url;
+      benefitsWhatsApp.href = url;
+      bottomWhatsApp.href = url;
+      guideWhatsApp.href = url;
+      stickyWhatsApp.href = url;
+    }
+
+    function renderAll() {
+      renderCourses();
+      renderReason();
+      renderOffers();
+      renderCourseDetail();
+      renderObjections();
+      renderSchedule();
+      renderGuide();
+      updateWhatsAppLinks();
+    }
+
+    document.querySelectorAll("[data-reason]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedReason = button.dataset.reason;
+        renderReason();
+        renderCourseDetail();
+        updateWhatsAppLinks();
+      });
+    });
+
+    countrySelect.addEventListener("change", () => {
+      renderSchedule();
+      renderGuide();
+      updateWhatsAppLinks();
+    });
+
+    monthSelect.addEventListener("change", () => {
+      renderSchedule();
+      renderGuide();
+      updateWhatsAppLinks();
+    });
+
+    guideCountry.addEventListener("change", () => {
+      countrySelect.value = guideCountry.value;
+      selectedScheduleIndex = 0;
+      renderAll();
+    });
+
+    guideMonth.addEventListener("change", () => {
+      monthSelect.value = guideMonth.value;
+      selectedScheduleIndex = 0;
+      renderAll();
+    });
+
+    guideBack.addEventListener("click", () => {
+      guideStep = Math.max(0, guideStep - 1);
+      renderGuide();
+    });
+
+    guideNext.addEventListener("click", () => {
+      if (guideStep === 3) {
+        window.open(buildWhatsAppUrl(), "_blank", "noopener");
+        return;
+      }
+      guideStep = Math.min(3, guideStep + 1);
+      renderGuide();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
