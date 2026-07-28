@@ -2272,7 +2272,7 @@
   <a class="sticky-cta" id="stickyWhatsApp" href="#" target="_blank" rel="noopener">Enviar cotizacion a ISA</a>
 
   <script>
-    const WHATSAPP_NUMBER = "";
+    const WHATSAPP_NUMBER = "5493413483263";
 
     const courses = [
       {
@@ -3793,18 +3793,51 @@
       const month = monthSelect.value;
       const schedules = getCourseSchedules(selectedCourse.id, country, month);
       const selectedSchedule = schedules[selectedScheduleIndex] || schedules[0];
-      const schedule = selectedSchedule ? `${selectedSchedule.level}, ${selectedSchedule.time}, inicio ${selectedSchedule.date}${selectedSchedule.finish ? `, finaliza ${selectedSchedule.finish}` : ""}, comision ${selectedSchedule.commission}, ${formatSeatsShort(selectedSchedule.seats).toLowerCase()}` : "sin horario seleccionado";
       const price = getQuotePrice();
       const onDemand = getOnDemandOffer();
       const onDemandPrice = getOnDemandPrice();
       const selectedLevel = getSelectedLevel();
-      const reason = selectedReason === "hobby" ? "hobby" : selectedReason === "viaje" ? "viaje" : "trabajo";
-      const format = selectedFormat === "grupal" ? "curso grupal en vivo" : "curso pregrabado on demand";
-      const scheduleText = selectedFormat === "grupal" ? ` Me interesa el grupo de ${month}, ${schedule}.` : "";
-      const certificateText = selectedFormat === "grupal" && hasUaiCertificate(selectedCourse) ? " Vi que incluye certificado UAI segun curso." : "";
-      const priceText = selectedFormat === "grupal" ? ` La cotizacion que vi es: precio regular ${price.symbol}${formatMoney(price.regular)}, beneficio ${price.discountLabel}, total ${price.symbol}${formatMoney(price.finalRaw)} y ${price.quotas} cuotas de ${price.symbol}${formatMoney(price.quota)}.` : "";
-      const onDemandText = selectedFormat === "pregrabado" ? ` Vi la opcion pregrabada: ${onDemand.classes}, ${onDemand.access}. Precio visto: ${formatOnDemandAmount(onDemandPrice, onDemandPrice.main)} por ${onDemandPrice.mainLabel}; pago unico ${formatOnDemandAmount(onDemandPrice, onDemandPrice.transfer)}. Quiero que me confirmes acceso, contenido incluido y pasos de reserva.` : "";
-      const text = `Hola ISA, arme mi cotizacion en la pagina de IKARUGA. Me interesa ${selectedCourse.name}${selectedLevel ? `, nivel ${selectedLevel.label}` : ""}, por ${reason}. Elegi ${format}, estudiaria desde ${country} y quiero revisar ${month}.${scheduleText}${priceText}${certificateText}${onDemandText} Quiero que me confirmes si puedo reservar esta opcion.`;
+      const reasonLabel = selectedReason === "hobby" ? "Hobby" : selectedReason === "viaje" ? "Viaje" : "Trabajo";
+      const formatLabel = selectedFormat === "grupal" ? "Grupal en vivo" : "Pregrabado on demand";
+      const lines = [
+        "Hola ISA, vengo de la pagina de IKARUGA y quiero avanzar con esta opcion.",
+        "",
+        "Mi eleccion:",
+        `Idioma: ${selectedCourse.name}`,
+        `Nivel: ${selectedLevel ? selectedLevel.label : "A confirmar"}`,
+        `Objetivo: ${reasonLabel}`,
+        `Modalidad: ${formatLabel}`,
+        `Estudiaria desde: ${country}`
+      ];
+      if (selectedFormat === "grupal") {
+        lines.push(
+          `Mes: ${month}`,
+          `Grupo: ${selectedSchedule ? selectedSchedule.level : "A confirmar"}`,
+          `Horario: ${selectedSchedule ? selectedSchedule.time : "A confirmar"}`,
+          `Inicio: ${selectedSchedule ? selectedSchedule.date : "A confirmar"}`,
+          `Finalizacion: ${selectedSchedule && selectedSchedule.finish ? selectedSchedule.finish : "A confirmar"}`,
+          `Comision: ${selectedSchedule ? selectedSchedule.commission : "A confirmar"}`,
+          `Cupo visto: ${formatSeatsLabel(selectedSchedule ? selectedSchedule.seats : null)}`,
+          `Precio regular: ${price.symbol}${formatMoney(price.regular)}`,
+          `Beneficio: ${price.discountLabel}`,
+          `Total: ${price.symbol}${formatMoney(price.finalRaw)}`,
+          `Cuotas: ${price.quotas} x ${price.symbol}${formatMoney(price.quota)} sin interes`,
+          `Certificado: ${hasUaiCertificate(selectedCourse) ? price.cert : "No incluye certificacion UAI"}`
+        );
+      } else {
+        lines.push(
+          "Mes: No aplica",
+          "Horario: Sin horario fijo",
+          `Clases: ${onDemand.classes}`,
+          `Acceso: ${onDemand.access}`,
+          `Incluye: ${onDemand.includes}`,
+          `Aprendizaje: ${onDemand.learns}`,
+          `Precio: ${formatOnDemandAmount(onDemandPrice, onDemandPrice.main)} por ${onDemandPrice.mainLabel}`,
+          `Pago unico: ${formatOnDemandAmount(onDemandPrice, onDemandPrice.transfer)}`
+        );
+      }
+      lines.push("", "Quiero que me confirmes si esta opcion es correcta para mi y como reservo.");
+      const text = lines.join("\n");
       const base = WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}` : "https://wa.me/";
       return `${base}?text=${encodeURIComponent(text)}`;
     }
